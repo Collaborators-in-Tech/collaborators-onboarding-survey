@@ -1,12 +1,12 @@
 import React from "react";
-import Form from "../components/Form";
+import GoToFormButton from "../components/GoToFormButton";
 
 const WelcomePage = () => {
   return (
     <main>
-      <h1>Welcome to Collaborators!👋</h1>
+      <h1>Welcome to Collaborators! 👋</h1>
       <p>Please fill out the form to join the community.</p>
-      <Form />
+      <GoToFormButton />
     </main>
   );
 };

@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage";
 import NotFound from "./pages/NotFound";
+import FormPage from "./pages/FormPage";
 
 function App() {
   return (
