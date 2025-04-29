@@ -1,5 +1,6 @@
 import React from "react";
 import SubmitButton from "./SubmitButton";
+import "../styles/form.css";
 
 const Form = () => {
   return (
