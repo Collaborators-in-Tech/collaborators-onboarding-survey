@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('form_submission', function (Blueprint $table) {
+        Schema::create('form_submissions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('form_id')->constrained('forms')->onDelete('cascade');
+            $table->string('email');
+            $table->boolean('consent_given');
+            $table->timestamp('submitted_at')->useCurrent();
             $table->timestamps();
         });
     }
