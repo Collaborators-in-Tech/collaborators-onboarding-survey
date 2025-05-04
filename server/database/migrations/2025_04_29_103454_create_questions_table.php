@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('depending_value')->nullable();
             $table->integer('sort_order');
             $table->boolean('is_required');
+            $table->json('options')->nullable();
             $table->timestamps();
         });
     }

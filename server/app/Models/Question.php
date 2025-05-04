@@ -17,6 +17,7 @@ class Question extends Model
         'sort_order',
         'depends_on_question_id',
         'depending_value',
+        'option'
 
     ];
     public function form(){
