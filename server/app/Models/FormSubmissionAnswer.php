@@ -15,7 +15,7 @@ class FormSubmissionAnswer extends Model
     ];
     public function formSubmission()
     {
-        return $this->belongsTo(FormSubmission::class);
+        return $this->belongsTo(FormSubmission::class,'submission_id');
     }
 
     // Relationship to the question

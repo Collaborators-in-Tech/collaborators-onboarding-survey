@@ -18,7 +18,7 @@ class FormSubmission extends Model
     {
         return $this->belongsTo(Form::class);
     }
-    public function formSubmissionAnswers(){
-        return $this->hasMany(FormSubmissionAnswer::class);
+    public function answers(){
+        return $this->hasMany(FormSubmissionAnswer::class,'submission_id');
     }
 }
