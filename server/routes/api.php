@@ -9,7 +9,7 @@ use App\Http\Controllers\FormController;
 
 Route::get('/form/questions',[FormController::class,'getQuestions']);
 Route::post('/form/answers',[AnswersController::class,'postAnswers']);
-Route::get('/form/answers',[AnswersController::class,'getAnswers']);
+Route::middleware('auth:sanctum')->get('/form/answers',[AnswersController::class,'getAnswers']);
 
 Route::post("/register",[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);

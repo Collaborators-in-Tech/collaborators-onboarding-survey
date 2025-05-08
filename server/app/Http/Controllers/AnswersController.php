@@ -73,7 +73,6 @@ class AnswersController extends Controller
         
 
         return response()->json($response);
-
     }
 
 }
