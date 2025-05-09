@@ -13,10 +13,16 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
-  padding: 1rem;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100vw;
   min-height: 100vh;
+}
+
+body {
   background-color: var(--primary-color);
   font-family: system-ui, -apple-system, sans-serif;
   color: var(--text-color);
@@ -32,7 +38,6 @@ body {
   padding: 1rem;
 }
 
-h1,
 h2,
 h3,
 h4,
@@ -58,10 +63,6 @@ h2 {
 }
 
 @media (max-width: 600px) {
-  body {
-    padding: 0.5rem;
-  }
-
   .container {
     padding: 0.5rem;
   }
