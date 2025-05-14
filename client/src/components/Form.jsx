@@ -1,39 +1,139 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SubmitButton from "./SubmitButton";
+import ShortTextQuestion from "./questions/ShortTextQuestion";
+import SelectQuestion from "./questions/SelectQuestion";
+import CheckboxGroupQuestion from "./questions/CheckboxGroupQuestion";
 import "../styles/form.css";
 
-const questions = [
+const steps = [
   {
-    label: "Full name:",
-    type: "text",
-    name: "fullName",
-    required: true,
-  },
-  {
-    label: "Main goal in joining Collaborators:",
-    type: "select",
-    name: "goal",
-    options: [
-      { value: "networking", label: "Networking" },
-      { value: "projects", label: "Networking & Building Projects" },
+    title: "Who are you?",
+    questions: [
+      {
+        type: "short-text",
+        label: "Enter full name",
+        name: "fullName",
+        required: true,
+        placeholder: "Pippi Långstrump",
+      },
+      {
+        type: "short-text",
+        label: "Enter email",
+        name: "email",
+        required: true,
+        placeholder: "starkast.i.varlden@gmail.com",
+      },
     ],
   },
   {
-    label: "Weekly available hours:",
-    type: "number",
-    name: "hours",
-    min: 1,
-    max: 42,
+    title: "What's your professional roll now or what are you aiming for?",
+    questions: [
+      {
+        type: "short-text",
+        label: "Profession",
+        name: "profession",
+        required: true,
+        placeholder: "Potato designer",
+      },
+    ],
   },
   {
-    label: "Best times to join:",
-    type: "text",
-    name: "times",
+    title: "What's your top priority for career growth right now?",
+    questions: [
+      {
+        type: "short-text",
+        label: "Top priority",
+        name: "topPriority",
+        required: true,
+        placeholder: "More interview experience",
+      },
+    ],
   },
   {
-    label: "Describe yourself with emojis:",
-    type: "text",
-    name: "emojis",
+    title: "What are you hoping to get from this community?",
+    questions: [
+      {
+        type: "select",
+        label: "What do you need?",
+        name: "communityNeed",
+        required: true,
+        placeholder: "Chose an option",
+        options: [
+          { value: "networking", label: "Networking" },
+          { value: "projects", label: "Projects" },
+          { value: "mentorship", label: "Mentorship" },
+          { value: "inspiration", label: "Inspiration" },
+          { value: "other", label: "Other" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "What times suit you best for joining projects?",
+    questions: [
+      {
+        type: "checkbox-group",
+        label: "",
+        name: "projectTimes",
+        required: true,
+        options: [
+          { value: "full_day", label: "Full day" },
+          { value: "morning", label: "Morning" },
+          { value: "afternoon", label: "Afternoon" },
+          { value: "evening", label: "Evening" },
+          { value: "weekend", label: "Weekend" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "How many hours can you contribute to projects each week?",
+    questions: [
+      {
+        type: "short-text",
+        label: "Amount of hours",
+        name: "hoursPerWeek",
+        required: true,
+        placeholder: "e.g. 3h or 4 to 6h",
+      },
+    ],
+  },
+  {
+    title:
+      'Which disciplines do you want to work with? If you choose "other", please specify.',
+    questions: [
+      {
+        type: "checkbox-group",
+        label: "",
+        name: "disciplines",
+        required: true,
+        options: [
+          { value: "frontend", label: "Frontend" },
+          { value: "backend", label: "Backend" },
+          { value: "full_stack", label: "Full stack" },
+          { value: "ux_design", label: "UX design" },
+          { value: "ui_design", label: "UI design" },
+          { value: "graphic_design", label: "Graphic design" },
+          { value: "communication", label: "Communication" },
+        ],
+        showOtherInput: true,
+        otherInputName: "disciplinesOther",
+        otherInputPlaceholder: "Specify",
+      },
+    ],
+  },
+  {
+    title: "Describe yourself with emojis.",
+    questions: [
+      {
+        type: "short-text",
+        label: "Add a couple of emojis :)",
+        name: "emojis",
+        required: true,
+        placeholder: ":D",
+      },
+    ],
   },
 ];
 
@@ -56,13 +156,16 @@ const Form = () => {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({
     fullName: "",
-    goal: "",
-    hours: "",
-    times: "",
-    emojis: "",
+    email: "",
+    profession: "",
+    topPriority: "",
+    communityNeed: "",
+    projectTimes: [],
+    hoursPerWeek: "",
+    disciplines: [],
+    disciplinesOther: "",
   });
-
-  const currentQuestion = questions[step];
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,7 +173,7 @@ const Form = () => {
   };
 
   const handleNext = () => {
-    if (step < questions.length - 1) {
+    if (step < steps.length - 1) {
       setStep((prev) => prev + 1);
     }
   };
@@ -78,6 +181,8 @@ const Form = () => {
   const handleBack = () => {
     if (step > 0) {
       setStep((prev) => prev - 1);
+    } else {
+      navigate("/");
     }
   };
 
@@ -88,50 +193,73 @@ const Form = () => {
 
   return (
     <div className="form-container">
-      <div className="color-bar">
-        {colorBlocks.map((color, idx) => (
-          <div
-            key={idx}
-            className="color-block"
-            style={{ backgroundColor: color }}
-          />
-        ))}
-      </div>
+      <h2 className="form-title">{steps[step].title}</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          {currentQuestion.label}
-          {currentQuestion.type === "select" ? (
-            <select
-              name={currentQuestion.name}
-              value={formData[currentQuestion.name]}
-              onChange={handleChange}
-            >
-              {currentQuestion.options.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input
-              type={currentQuestion.type}
-              name={currentQuestion.name}
-              value={formData[currentQuestion.name]}
-              onChange={handleChange}
-              min={currentQuestion.min}
-              max={currentQuestion.max}
-              required={currentQuestion.required}
-            />
-          )}
-        </label>
+        {steps[step].questions.map((q) => {
+          if (q.type === "short-text") {
+            return (
+              <ShortTextQuestion
+                key={q.name}
+                label={q.label}
+                name={q.name}
+                value={formData[q.name]}
+                onChange={handleChange}
+                required={q.required}
+                placeholder={q.placeholder}
+              />
+            );
+          }
+          if (q.type === "select") {
+            return (
+              <SelectQuestion
+                key={q.name}
+                label={q.label}
+                name={q.name}
+                value={formData[q.name]}
+                onChange={handleChange}
+                required={q.required}
+                placeholder={q.placeholder}
+                options={q.options}
+              />
+            );
+          }
+          if (q.type === "checkbox-group") {
+            const isDisciplines = q.name === "disciplines";
+            return (
+              <CheckboxGroupQuestion
+                key={q.name}
+                label={q.label}
+                name={q.name}
+                values={formData[q.name]}
+                onChange={handleChange}
+                required={q.required}
+                options={q.options}
+                showOtherInput={!!q.showOtherInput}
+                otherValue={isDisciplines ? formData.disciplinesOther : ""}
+                onOtherChange={
+                  isDisciplines
+                    ? (e) =>
+                        handleChange({
+                          target: {
+                            name: "disciplinesOther",
+                            value: e.target.value,
+                          },
+                        })
+                    : undefined
+                }
+                otherInputName={q.otherInputName}
+                otherInputPlaceholder={q.otherInputPlaceholder}
+              />
+            );
+          }
+          return null;
+        })}
         <div className="form-nav">
-          {step > 0 && (
-            <button type="button" onClick={handleBack}>
-              Back
-            </button>
-          )}
-          {step < questions.length - 1 ? (
-            <button type="button" onClick={handleNext}>
+          <button type="button" onClick={handleBack}>
+            Back
+          </button>
+          {step < steps.length - 1 ? (
+            <button type="button" className="next" onClick={handleNext}>
               Next
             </button>
           ) : (

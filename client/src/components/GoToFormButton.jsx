@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./GoToFormButton.css";
 
 const GoToFormButton = () => {
   const navigate = useNavigate();
@@ -8,7 +9,11 @@ const GoToFormButton = () => {
     navigate("/form");
   };
 
-  return <button onClick={handleClick}>Start the Form</button>;
+  return (
+    <button className="welcome-btn" onClick={handleClick}>
+      Lets rock!
+    </button>
+  );
 };
 
 export default GoToFormButton;

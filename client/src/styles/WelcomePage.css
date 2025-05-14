@@ -1,0 +1,129 @@
+/* Welcome Page Styles */
+
+.welcome-header {
+  background: #fff;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  border-bottom: 5px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  padding-top: 1.2rem;
+  padding-bottom: 0;
+  width: 100%;
+  position: relative;
+}
+
+.welcome-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #1f2937;
+  letter-spacing: 0.02em;
+  margin: 0;
+  padding: 0 1.2rem 0.2rem 1.2rem;
+  text-align: left;
+}
+
+.color-bar {
+  display: flex;
+  width: 100%;
+  height: 16px;
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+.color1 {
+  background: #f3c846;
+  flex: 1;
+}
+.color2 {
+  background: #7c6fc4;
+  flex: 1;
+}
+.color3 {
+  background: #b0c4d6;
+  flex: 1;
+}
+.color4 {
+  background: #f3b6c4;
+  flex: 1;
+}
+.color5 {
+  background: #e97d3c;
+  flex: 1;
+}
+
+.welcome-container {
+  background: #438a63;
+  border-radius: 18px;
+  padding: 0;
+  max-width: 420px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.welcome-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.2rem 2.5rem 1.2rem;
+}
+
+.welcome-text {
+  color: #fff;
+  font-size: 2rem;
+  text-align: left;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  width: 100%;
+  max-width: 95%;
+}
+
+button {
+  width: 100%;
+  max-width: 350px;
+  padding: 1rem 0;
+  background: #f3c846;
+  color: #222;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+button:hover {
+  background: #7c6fc4;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .welcome-container {
+    padding: 0;
+    max-width: 100vw;
+    border-radius: 0;
+  }
+  .welcome-header {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding-top: 0.7rem;
+  }
+  .welcome-title {
+    font-size: 2rem;
+    padding: 0 0.7rem 0.2rem 0.7rem;
+  }
+  .welcome-content {
+    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+  }
+  .welcome-text {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  button {
+    font-size: 1rem;
+    padding: 0.8rem 0;
+  }
+}
