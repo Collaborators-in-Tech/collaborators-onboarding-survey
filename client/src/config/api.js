@@ -3,6 +3,7 @@
 const BASE_URL = "http://127.0.0.1:8000/api";
 
 export const API = {
+  FORM_LINK:"http://localhost:5173/",
   LOGIN: `${BASE_URL}/login`,
   REGISTER: `${BASE_URL}/register`,
   LOGOUT: `${BASE_URL}/logout`,

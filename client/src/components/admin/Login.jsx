@@ -1,17 +1,13 @@
 import { useState } from "react";
-import Button from "./Button";
+import Button from "../Button";
 import { useNavigate } from "react-router-dom";
-import {API} from "../config/api";
+import {API} from "../../config/api";
 
-const Login = ({isOpen,toggleForm}) => {
+const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        toggleForm()
-        console.log("login button")
-    }
     const handleSubmit = async(e) => {
         e.preventDefault();
         try{
@@ -26,8 +22,10 @@ const Login = ({isOpen,toggleForm}) => {
             console.log("login information",data);
             console.log("token",data.token);
             localStorage.setItem("authToken",data.token);
-            console.log("user",data.user);
-            localStorage.setItem("user",data.user);
+            console.log("user----->>>",data.user);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            console.log("_____________user from storage______");
+            console.log(localStorage.getItem("user"));
             navigate("/admin/admin-dashboard");
 
         } catch(error){
@@ -36,34 +34,34 @@ const Login = ({isOpen,toggleForm}) => {
 
     }
     return(
-        <>
-            <Button variant="yellow" onClick={handleLogin} className="mx-2"> Login</Button>
-            {isOpen && (
-                <div>
-                     <h3>Log In here</h3>
+        <> 
+            <div>     
                 <form onSubmit={handleSubmit} >
                     <div>
-                        <label>Email:</label>
                         <input 
+                        className="question-input"
                         type="email"
                         name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
                         required />
                     </div>
                     <div>
-                        <label>Password:</label>
-                        <input type="password" 
+                        <input 
+                        className="question-input"
+                        type="password" 
                         name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)} 
+                        placeholder="Password"
                         required />
                     </div>
-                    <Button type="submit" >Submit</Button>
+                    <Button type="submit" >Login</Button>
 
                 </form>
-                </div>
-            )}
+            </div>
+            
         </>
     )
 

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import Logout from "../components/Logout";
 import {API}  from "../config/api"
 import { useNavigate } from "react-router-dom";
+import Register from "../components/admin/Register";
 
 const AdminDashboard = () => {
   const [formsList, setFormsList] = useState([]);
   const navigate = useNavigate();
-
+  const admin = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     fetch(API.GET_ANSWERS, {
       method: "GET",
@@ -51,8 +52,9 @@ const handleDelete = (id) =>{
 }
   return (
     <main>
-      <h2>Welcome to Admin Dashboard!</h2>
+      <h2>Welcome {admin?.name}!</h2>
       <Logout />
+      
       <h3>All users who filled the form</h3>
 
       {formsList.length > 0 ? (
@@ -83,6 +85,7 @@ const handleDelete = (id) =>{
       ) : (
         <p>No form submissions found.</p>
       )}
+       <Register />  
     </main>
   );
 };
