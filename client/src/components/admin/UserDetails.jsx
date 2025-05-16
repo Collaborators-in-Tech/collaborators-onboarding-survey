@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import AdminHeader from "./adminHeader";
 
 const UserDetails = () => {
   const location = useLocation();
@@ -8,8 +9,9 @@ const UserDetails = () => {
   if (!user) return <p>No user data found.</p>;
 
   return (
-    <div>
-      <h3>{admin?.name}</h3>
+    <>
+    <header> <AdminHeader>Admin Dashboard</AdminHeader></header>
+    <main className="admin-container">
       <h2>User Details</h2>
       <p><strong>Name:</strong> {user.name}</p>
       <p><strong>Email:</strong> {user.email}</p>
@@ -22,7 +24,8 @@ const UserDetails = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </main>
+    </>
   );
 };
 

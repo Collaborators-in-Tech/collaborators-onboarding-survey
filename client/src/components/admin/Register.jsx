@@ -35,11 +35,11 @@ const Register = () => {
     }
     return(
         <>
-            <Button variant="purple" onClick={handleRegister}> Register</Button>
+            <Button variant="purple" onClick={handleRegister}> Register new admin</Button>
 
             {isOpen && (
                 <div>
-                     <h3>Register here</h3>
+                     <h3>Register</h3>
                 <form onSubmit={handleSubmit}>
                      <div>
                         <label>Name:</label>

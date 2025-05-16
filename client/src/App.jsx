@@ -6,6 +6,7 @@ import Admin from "./pages/AdminPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import UserDetails from "./components/admin/UserDetails";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
+import EditFormQuestions from "./pages/EditFormQuestions";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/admin/admin-dashboard" element={<ProtectedRoute> <AdminDashboard /> </ProtectedRoute>} />
 
       <Route path="/admin/user-details" element={<ProtectedRoute><UserDetails /> </ProtectedRoute>} />
+      <Route path="/admin/edit-form" element={<ProtectedRoute><EditFormQuestions /> </ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
