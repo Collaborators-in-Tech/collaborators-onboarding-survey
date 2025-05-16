@@ -1,6 +1,6 @@
 
 import Logout from "../components/Logout";
-import Register from "../components/admin/Register";
+import Register from "./Register";
 import AdminHeader from "../components/admin/adminHeader";
 import "../styles/admin.css";
 import UserList from "../components/admin/UserList";
@@ -12,13 +12,15 @@ const AdminDashboard = () => {
     const editForm = () => {
         navigate("/admin/edit-form");
     }
+    const registerAdmin = () => {
+      navigate("/admin/register")
+    }
 
   return (
     <>
     <header> <AdminHeader>Admin Dashboard</AdminHeader></header>
     <main className="admin-container">
-      <Logout />
-      <Register /> 
+      <Button onClick={registerAdmin}> Register new admin</Button>
       <Button onClick={editForm}> Edit form Questions</Button>
       <UserList /> 
     </main>

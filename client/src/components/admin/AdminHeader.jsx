@@ -1,13 +1,69 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { API } from "../../config/api";
 
+const AdminHeader = ({ children ,handleNavigate}) => {
+    const storedUser = localStorage.getItem("user");
+    const admin = storedUser ? JSON.parse(storedUser) : null;
+    
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
 
-const AdminHeader = ({children}) => {
-    const admin = JSON.parse(localStorage.getItem("user"));
-    return (
-        <main  className="admin-header">
-            <p>{children}</p>
-            <p>{admin?.name}</p>
-        </main>
-    )
-}
+  const handleLogout = async () => {
+    const token = localStorage.getItem("authToken");
+    console.log("token: ",token);
+
+    try {
+        const response = await fetch(API.LOGOUT, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+
+        console.log("response is",response);
+
+        if (response.ok) {
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("user");
+            navigate("/admin");
+        } else {
+            console.error("Logout failed:", data);
+        }
+
+    } catch (error) {
+        console.error("Error during logout:", error);
+    }
+
+};
+ const handleClick = () => {
+    handleNavigate();
+ }
+
+  return (
+    <main className="admin-header">
+      {handleNavigate ? (
+        <p onClick={handleNavigate} className="admin-header-title clickable">
+          {children}
+        </p>
+      ) : (
+        <p className="admin-header-title">{children}</p>
+      )}
+
+      <div className="admin-name-wrapper">
+        <p onClick={() => setShowDropdown(!showDropdown)} className="admin-name">
+          {admin?.name} 
+        </p>
+
+        {showDropdown && (
+          <div className="dropdown-menu">
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        )}
+      </div>
+    </main>
+  );
+};
 
 export default AdminHeader;

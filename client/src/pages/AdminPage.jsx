@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Register from "../components/admin/Register";
+import Register from "./Register";
 import Login from "../components/admin/Login";
 import { QRCodeCanvas } from "qrcode.react";
 import { Tooltip } from "react-tooltip";

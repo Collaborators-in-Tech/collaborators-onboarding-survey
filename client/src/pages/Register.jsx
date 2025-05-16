@@ -1,7 +1,8 @@
 import { useState } from "react";
-import Button from "../Button";
-import {API}from "../../config/api";
+import Button from "../components/Button";
+import {API}from "../config/api";
 import { useNavigate } from "react-router-dom";
+import AdminHeader from "../components/admin/adminHeader";
 
 const Register = () => {
     const [name,setName] = useState("");
@@ -33,46 +34,49 @@ const Register = () => {
 
 
     }
+    const handleNavigate = () => {
+        navigate("/admin/admin-dashboard");
+    }
     return(
         <>
-            <Button variant="purple" onClick={handleRegister}> Register new admin</Button>
-
-            {isOpen && (
-                <div>
-                     <h3>Register</h3>
+            <header> <AdminHeader handleNavigate = {handleNavigate}>Back to Dashboard </AdminHeader></header>
+            <div className="admin-container">
+                <h3>Register new admin</h3>
                 <form onSubmit={handleSubmit}>
-                     <div>
-                        <label>Name:</label>
+                    <div>
                         <input
-                         type="text" 
-                         name="name" 
-                         value={name}
-                         onChange={(e) => setName(e.target.value)}
-                         required />
+                        className="question-input"
+                        type="text" 
+                        name="name" 
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Name"
+                        required />
                     </div>
                     <div>
-                        <label>Email:</label>
                         <input 
+                        className="question-input"
                         type="email" 
                         name="email" 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
                         required />
                     </div>
                     <div>
-                        <label>Password:</label>
                         <input 
+                            className="question-input"
                             type="password" 
                             name="password" 
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            placeholder="password"
                             required />
                     </div>
                     <Button  type="submit" >Submit</Button>
-
                 </form>
-                </div>
-            )}
+            </div>
+        
         </>
     )
 

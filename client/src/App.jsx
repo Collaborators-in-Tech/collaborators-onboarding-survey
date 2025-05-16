@@ -7,7 +7,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import UserDetails from "./components/admin/UserDetails";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 import EditFormQuestions from "./pages/EditFormQuestions";
-
+import Register from "./pages/Register";
 function App() {
   return (
     <Routes>
@@ -18,6 +18,7 @@ function App() {
 
       <Route path="/admin/user-details" element={<ProtectedRoute><UserDetails /> </ProtectedRoute>} />
       <Route path="/admin/edit-form" element={<ProtectedRoute><EditFormQuestions /> </ProtectedRoute>} />
+      <Route path="/admin/register" element={<ProtectedRoute><Register/></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
