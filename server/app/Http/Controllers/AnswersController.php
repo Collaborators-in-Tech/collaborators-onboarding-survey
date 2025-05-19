@@ -57,10 +57,16 @@ class AnswersController extends Controller
                             ->where('form_id',$form_id)
                             ->get();
         log::info("all the form submissions");
-        log::info($formSubmissions);
         $response = $formSubmissions->map(function ($submission) {
+            info("------ submission ------");
+            info($submission);
+        
+            $nameAnswer = $submission->answers->first()?->answer ?? 'N/A';
+        
             return [
+                'id' => $submission->id,
                 'email' => $submission->email,
+                'name' => $nameAnswer,
                 'consent_given' => $submission->consent_given,
                 'answers' => $submission->answers->map(function ($answer) {
                     return [
@@ -71,8 +77,19 @@ class AnswersController extends Controller
             ];
         });
         
+        
 
         return response()->json($response);
+    }
+    public function deleteUser($id) {
+        $submission  = FormSubmission::find($id);
+        if (!$submission) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+    
+        $submission->delete();
+    
+        return response()->json(['message' => 'User deleted successfully']);
     }
 
 }
