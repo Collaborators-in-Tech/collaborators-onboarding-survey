@@ -100,6 +100,7 @@ const QuestionEditor = ({ question, formId }) => {
       }
   };
   const handleCancel = () => {
+    navigate("/admin/edit-form");
     console.log("here is the cancel...");
   }
 
