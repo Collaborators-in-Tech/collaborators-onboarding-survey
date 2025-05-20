@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FaPlus, FaRecycle, FaTrash } from "react-icons/fa";
+import {API} from '../../config/api';
+import { useNavigate } from "react-router-dom";
 
 const QuestionEditor = ({ question, formId }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     question_text: "",
     type: "text",
@@ -17,11 +20,12 @@ const QuestionEditor = ({ question, formId }) => {
       question_text: question.question_text || "",
       type: question.type || "text",
       is_required: question.is_required || 0,
-      options: question.options ? JSON.parse(question.options) : [],
+      options: question.options ? JSON.parse(question.options) : null,
       sort_order: question.sort_order || 1,
       depends_on_question_id: question.depends_on_question_id || null,
-      depending_value: question.depending_value || "",
+      depending_value: question.depending_value || null,
     });
+    console.log("---------formData befor change-------",formData);
   }, [question]);
 
   const handleChange = (e) => {
@@ -64,17 +68,40 @@ const QuestionEditor = ({ question, formId }) => {
     }));
   };
 
-  const handleSave = () => {
+  const handleSave = async() => {
+   
     const payload = {
-      ...formData,
-      options: JSON.stringify(formData.options),
-      form_id: formId,
-    };
-
-    // You can use fetch or axios to send this
+        ...formData,
+        options: formData.options ? JSON.stringify(formData.options) : null,
+      };
     console.log("Save payload:", payload);
-    // axios.post('/your/api', payload).then(...);
+    console.log("question is here",question);
+    try {
+        const response = await fetch(API.UPDATE_QUESTION(formId,question.id), {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+          body: JSON.stringify(payload),
+        });
+    
+        const data = await response.json();
+    
+        if (!response.ok) {
+          console.error("Update failed:", data);
+          return;
+        }
+    
+        console.log("Question updated successfully:", data);
+        navigate("/admin/edit-form");
+      } catch (error) {
+        console.error("Error saving question:", error);
+      }
   };
+  const handleCancel = () => {
+    console.log("here is the cancel...");
+  }
 
   return (
     <>
@@ -163,7 +190,7 @@ const QuestionEditor = ({ question, formId }) => {
       </div>
 
       <div className="form-nav">
-        <button>Cancel</button>
+        <button onClick={handleCancel}>Cancel</button>
         <button onClick={handleSave}>Save Changes</button>
       </div>
     </>

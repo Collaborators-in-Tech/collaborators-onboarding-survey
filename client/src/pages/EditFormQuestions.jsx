@@ -3,6 +3,7 @@ import AdminHeader from "../components/admin/adminHeader";
 import { useEffect, useState } from "react";
 import { API } from "../config/api";
 import QuestionCard from "../components/admin/QuestionCard";
+import { FaArrowLeft } from "react-icons/fa";
 
 const EditFormQuestions = () => {
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ const EditFormQuestions = () => {
     return (
         <>
             <header>
-                <AdminHeader handleNavigate={handleNavigate}>Back to Dashboard</AdminHeader>
+                <AdminHeader handleNavigate={handleNavigate}><FaArrowLeft/></AdminHeader>
             </header>
             <div className="admin-container">
                 <h3>{form?.name}</h3>

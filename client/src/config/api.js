@@ -10,6 +10,7 @@ export const API = {
   UPDATE_PASSWORD: `${BASE_URL}/update-password`,
   GET_QUESTIONS: `${BASE_URL}/form/questions`,
   GET_QUESTION: (formId,questionId) => `${BASE_URL}/form/question/${formId}/${questionId}`,
+  UPDATE_QUESTION:(formId,questionId) => `${BASE_URL}/form/question/${formId}/${questionId}`,
   POST_ANSWERS: `${BASE_URL}/form/answers`,
   GET_ANSWERS: `${BASE_URL}/form/answers`,
   DELETE_USER: (id) =>`${BASE_URL}/delete-user/${id}`,
