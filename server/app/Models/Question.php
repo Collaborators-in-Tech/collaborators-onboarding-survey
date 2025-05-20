@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Question extends Model
 {
@@ -13,21 +15,31 @@ class Question extends Model
         'form_id',
         'question_text',
         'type',
-        'is_required',
-        'sort_order',
         'depends_on_question_id',
         'depending_value',
-        'option'
-
+        'sort_order',
+        'is_required',
+        'options'
     ];
-    public function form(){
-        return $this->belongsTo(Form::class);
 
+    protected $casts = [
+        'options' => 'array',
+        'is_required' => 'boolean'
+    ];
+
+    public function form(): BelongsTo
+    {
+        return $this->belongsTo(Form::class);
     }
-    // Relationship for dependent question
-    public function parentQuestion()
+
+    public function dependentQuestion(): BelongsTo
     {
         return $this->belongsTo(Question::class, 'depends_on_question_id');
+    }
+
+    public function answers(): HasMany
+    {
+        return $this->hasMany(FormSubmissionAnswer::class);
     }
 
     // Relationship for dependent questions

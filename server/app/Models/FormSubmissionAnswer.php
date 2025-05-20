@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FormSubmissionAnswer extends Model
 {
@@ -13,13 +14,13 @@ class FormSubmissionAnswer extends Model
         'question_id',
         'answer'
     ];
-    public function formSubmission()
+
+    public function submission(): BelongsTo
     {
-        return $this->belongsTo(FormSubmission::class,'submission_id');
+        return $this->belongsTo(FormSubmission::class, 'submission_id');
     }
 
-    // Relationship to the question
-    public function question()
+    public function question(): BelongsTo
     {
         return $this->belongsTo(Question::class);
     }
