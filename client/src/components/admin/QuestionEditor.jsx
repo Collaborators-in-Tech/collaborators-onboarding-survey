@@ -16,17 +16,32 @@ const QuestionEditor = ({ question, formId }) => {
   });
 
   useEffect(() => {
+    let parsedOptions = [];
+  
+    if (!question.options) {
+      parsedOptions = [];
+    } else if (Array.isArray(question.options)) {
+      parsedOptions = question.options;
+    } else if (typeof question.options === "string") {
+      try {
+        parsedOptions = JSON.parse(question.options);
+      } catch {
+        // If invalid JSON, fallback to splitting by comma or empty array
+        parsedOptions = question.options.split(",").map(opt => opt.trim());
+      }
+    }
+  
     setFormData({
       question_text: question.question_text || "",
       type: question.type || "text",
       is_required: question.is_required || 0,
-      options: question.options ? JSON.parse(question.options) : null,
+      options: parsedOptions,
       sort_order: question.sort_order || 1,
       depends_on_question_id: question.depends_on_question_id || null,
       depending_value: question.depending_value || null,
     });
-    console.log("---------formData befor change-------",formData);
   }, [question]);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
