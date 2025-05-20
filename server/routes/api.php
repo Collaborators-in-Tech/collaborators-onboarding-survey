@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 
 Route::get('/form/questions', [FormController::class, 'getQuestions']);
+Route::middleware('auth:sanctum')->get('/form/question/{formId}/{questionID}', [FormController::class, 'getQuestion']);
 Route::post('/form/answers', [AnswersController::class, 'postAnswers']);
 Route::middleware('auth:sanctum')->get('/form/answers', [AnswersController::class, 'getAnswers']);
 

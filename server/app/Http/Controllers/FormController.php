@@ -20,4 +20,14 @@ class FormController extends Controller
         ]);
 
     }
+    public function getQuestion($formId, $questionID)
+    {
+        // Example implementation
+        $question = Question::where('form_id', $formId)->where('id', $questionID)->first();
+    
+        if (!$question) {
+            return response()->json(['message' => 'Question not found'], 404);
+        }
+        return response()->json($question);
+    }
 }

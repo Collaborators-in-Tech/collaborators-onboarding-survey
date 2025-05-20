@@ -1,16 +1,23 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AdminHeader from "./adminHeader";
 
 const UserDetails = () => {
   const location = useLocation();
   const { user } = location.state || {};
   const admin = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+      navigate("/admin/admin-dashboard");
+  };
 
   if (!user) return <p>No user data found.</p>;
 
   return (
     <>
-    <header> <AdminHeader>Admin Dashboard</AdminHeader></header>
+    <header>
+        <AdminHeader handleNavigate={handleNavigate}>Back to Dashboard</AdminHeader>
+    </header>
     <main className="admin-container">
       <h2>User Details</h2>
       <p><strong>Name:</strong> {user.name}</p>

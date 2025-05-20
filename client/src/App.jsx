@@ -8,6 +8,7 @@ import UserDetails from "./components/admin/UserDetails";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 import EditFormQuestions from "./pages/EditFormQuestions";
 import Register from "./pages/Register";
+import EditQuestion from "./pages/EditQuestion";
 function App() {
   return (
     <Routes>
@@ -18,6 +19,7 @@ function App() {
 
       <Route path="/admin/user-details" element={<ProtectedRoute><UserDetails /> </ProtectedRoute>} />
       <Route path="/admin/edit-form" element={<ProtectedRoute><EditFormQuestions /> </ProtectedRoute>} />
+      <Route  path="/admin/edit-question/:formId/:questionId" element={<ProtectedRoute><EditQuestion /></ProtectedRoute>}/>
       <Route path="/admin/register" element={<ProtectedRoute><Register/></ProtectedRoute>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
