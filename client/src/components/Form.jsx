@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SubmitButton from "./SubmitButton";
 import ShortTextQuestion from "./questions/ShortTextQuestion";
@@ -137,20 +137,20 @@ const steps = [
   },
 ];
 
-const colorBlocks = [
-  "#b7d8d6",
-  "#e6b0aa",
-  "#f7ca18",
-  "#e67e22",
-  "#27ae60",
-  "#7ed6df",
-  "#f6e58d",
-  "#95a5a6",
-  "#6c5ce7",
-  "#fd7272",
-  "#34495e",
-  "#f8c291",
-];
+// const colorBlocks = [
+//   "#b7d8d6",
+//   "#e6b0aa",
+//   "#f7ca18",
+//   "#e67e22",
+//   "#27ae60",
+//   "#7ed6df",
+//   "#f6e58d",
+//   "#95a5a6",
+//   "#6c5ce7",
+//   "#fd7272",
+//   "#34495e",
+//   "#f8c291",
+// ];
 
 const Form = () => {
   const [step, setStep] = useState(0);
@@ -166,12 +166,30 @@ const Form = () => {
     disciplinesOther: "",
   });
   const navigate = useNavigate();
+  const [questions, setQuestions] = useState();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/form/questions")
+      .then((res) => res.json())
+      .then((data) => {
+        setQuestions(data);
+        setLoading(false);
+        console.log("Questions fetched!", data)
+      })
+
+      .catch((err) => {
+        console.error("Error fetching questions:", err);
+        setLoading(false);
+      });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // handleNext should also check if required fields are filled.
   const handleNext = () => {
     if (step < steps.length - 1) {
       setStep((prev) => prev + 1);
@@ -191,6 +209,8 @@ const Form = () => {
     console.log("Submitted:", formData);
   };
 
+  if (loading) return <div> Loading questions...</div>
+ 
   return (
     <div className="form-container">
       <h2 className="form-title">{steps[step].title}</h2>
