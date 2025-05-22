@@ -1,7 +1,5 @@
 
 import "../../styles/admin/admin.css";
-
-import UserList from "../../components/admin/UserList";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { FaBook, FaList, FaPlug, FaPlus, FaUsers } from "react-icons/fa";
@@ -13,6 +11,9 @@ const AdminDashboard = () => {
     }
     const registerAdmin = () => {
       navigate("/admin/register")
+    }
+    const userSubmissions = () => {
+      navigate("/admin/users-list")
     }
 
   return (
@@ -45,7 +46,7 @@ const AdminDashboard = () => {
           <h3>User Submissions</h3>
           <div className="box">
             <div>
-              <div className="icon-box">
+              <div className="icon-box" onClick={userSubmissions}>
                 <FaUsers className="user-icon" />
               </div>
               Submitted Users
@@ -53,7 +54,6 @@ const AdminDashboard = () => {
           </div>
         </div>
     
-      <UserList /> 
     </main>
     </>
   );

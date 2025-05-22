@@ -45,7 +45,6 @@ const EditForm = () => {
 
     return (
         <>
-            <div className="admin-container">
                 <GoBack  url ={"/admin/admin-dashboard"}/>
                 <h3>{form?.name}</h3>
                
@@ -59,7 +58,7 @@ const EditForm = () => {
                     />
                    </div>
                 ))}
-                </div>
+              
            
         </>
     );

@@ -1,7 +1,9 @@
 import {API}  from "../../config/api"
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { FaEye, FaTrashAlt } from "react-icons/fa";
+import { FaEye, FaInfoCircle, FaTrashAlt } from "react-icons/fa";
+import "../../styles/admin/admin.css";
+import GoBack from "../../components/admin/GoBack";
 
 
 const UserList = () =>{
@@ -51,8 +53,11 @@ const UserList = () =>{
   
   }
     return (
+      <>
+      <GoBack url={"/admin/admin-dashboard"} />
+      <h3>Users form submission  List</h3>
         <div className="user-list">
-            <p>User List</p>
+            
             {formsList.length > 0 ? (
                 <div className="user-list">
                     <div className="user-list-header">
@@ -66,7 +71,7 @@ const UserList = () =>{
                         <span>{entry.name}</span>
                         <span>{entry.email}</span>
                         <span className="action-buttons">
-                            <span onClick={() => handleShowDetails(entry)}><FaEye /></span>
+                            <span onClick={() => handleShowDetails(entry)}>< FaInfoCircle /></span>
                             <span onClick={() => handleDelete(entry.id)}><FaTrashAlt /></span>
                         </span>
                     </div>
@@ -76,6 +81,7 @@ const UserList = () =>{
                 <p>No form submissions found.</p>
                 )}
      </div>
+     </>
 
     );
 

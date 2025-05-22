@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../../config/api";
 import QuestionEditor from "../../components/admin/QuestionEditor";
 import { FaArrowLeft } from "react-icons/fa";
+import GoBack from "../../components/admin/GoBack";
 
 const EditQuestion = () => {
     const { formId, questionId } = useParams();
@@ -50,7 +51,8 @@ const EditQuestion = () => {
 
     return (
         <>
-            <main className="admin-container">
+            <GoBack url={"/admin/edit-form"}/>
+            <main className="edit-question-container">
                 <div className="edit-card">
                     <QuestionEditor question = {question} formId={formId}/>                            
                 </div>

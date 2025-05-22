@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../../components/Button";
 import {API}from "../../config/api";
 import { useNavigate } from "react-router-dom";
+import GoBack from "../../components/admin/GoBack";
 
 const Register = () => {
     const [name,setName] = useState("");
@@ -30,16 +31,14 @@ const Register = () => {
         }catch(error){
             console.error("Error registering the user: ",error);
         }
-
-
     }
-    const handleNavigate = () => {
-        navigate("/admin/admin-dashboard");
-    }
+    
     return(
         <>
+            <GoBack url={"/admin/admin-dashboard"} />
+            <h3>Register new admin</h3>
             <div className="admin-container">
-                <h3>Register new admin</h3>
+                
                 <form onSubmit={handleSubmit}>
                     <div>
                         <input
