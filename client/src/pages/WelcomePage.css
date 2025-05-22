@@ -65,9 +65,10 @@
 }
 
 .welcome-content {
-  max-width: 326px;
+  max-width: 400px;
   background: none;
   box-shadow: none;
+  margin: 0 auto;
 }
 
 .welcome-text {
@@ -119,20 +120,17 @@ button:hover {
 
 @media (min-width: 600px) {
   .welcome-container {
-    padding: 6rem 4rem;
+    padding: 4rem;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
   }
 
   .welcome-content {
-    max-width: 1024px;
+    max-width: 900px;
   }
 
   .welcome-text {
     font-size: 3.4rem;
-  }
-}
-
-@media (min-width: 900px) {
-  .welcome-container {
-    padding: 12rem 4rem;
   }
 }
