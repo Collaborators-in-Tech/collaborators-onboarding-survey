@@ -1,0 +1,91 @@
+.admin-main{
+  background: none;
+  padding: 2rem 3rem 0.5rem 3rem;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+}
+/* ---------  css for AdminDashboard-------------------
+ */
+.icon-box {
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  max-width: 40px;
+  margin: 5px;
+  /* align-items: center;
+  justify-content: center; */
+  cursor: pointer;
+}
+
+.plus-icon {
+  color: orange;
+ 
+}
+.box-container{
+  margin-bottom: 10px;
+
+}
+.divider-line {
+  margin-top: 16px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  margin-bottom: 16px;
+}
+.box{
+  display: flex;
+ gap: 10px;
+}
+
+/* __________________________________________________________ */
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+     /* gap: 4px; */
+    padding: 5px; 
+  }
+  
+  .user-list-header,
+  .user-list-row {
+    display: grid;
+    grid-template-columns: 2fr 4fr 1fr;
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    align-items: center;
+    background-color: #f9f9f9;
+  }
+
+ /* _______________________EditForm___________________________________ */
+
+
+.question-card-container {
+  max-width: 600px;               /* Fixed width */
+  margin: 10px auto;          /* Center horizontally */
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.go-back {
+  margin: 10px;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.go-back:hover {
+  color: #f97316; /* orange on hover */
+}
+
+
+
+
+  
+ 
+  
+ 
+ 

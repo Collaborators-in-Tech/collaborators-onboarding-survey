@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { API } from "../config/api";
-import QuestionEditor from "../components/admin/QuestionEditor";
+import { API } from "../../config/api";
+import QuestionEditor from "../../components/admin/QuestionEditor";
 import { FaArrowLeft } from "react-icons/fa";
 
 const EditQuestion = () => {

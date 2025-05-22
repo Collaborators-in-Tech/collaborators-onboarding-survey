@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Register from "./Register";
-import Login from "../components/admin/Login";
+import Login from "../../components/admin/Login";
 import { QRCodeCanvas } from "qrcode.react";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css"; 
-import { API } from "../config/api";
+import { API } from "../../config/api";
 import { FaRegClipboard } from "react-icons/fa";
 import {
   FacebookShareButton,

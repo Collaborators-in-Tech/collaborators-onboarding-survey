@@ -4,7 +4,7 @@ import SubmitButton from "./SubmitButton";
 import ShortTextQuestion from "./questions/ShortTextQuestion";
 import SelectQuestion from "./questions/SelectQuestion";
 import CheckboxGroupQuestion from "./questions/CheckboxGroupQuestion";
-import "../styles/form.css";
+import "../styles/form/form.css";
 
 const steps = [
   {

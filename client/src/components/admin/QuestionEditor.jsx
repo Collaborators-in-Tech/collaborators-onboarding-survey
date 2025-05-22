@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaPlus, FaRecycle, FaTrash } from "react-icons/fa";
 import {API} from '../../config/api';
 import { useNavigate } from "react-router-dom";
+import "../../styles/admin/edit-question.css";
 
 const QuestionEditor = ({ question, formId }) => {
   const navigate = useNavigate();

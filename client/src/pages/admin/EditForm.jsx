@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { API } from "../config/api";
-import QuestionCard from "../components/admin/QuestionCard";
+import { API } from "../../config/api";
+import QuestionCard from "../../components/admin/QuestionCard";
 import { FaArrowLeft } from "react-icons/fa";
 
-const EditFormQuestions = () => {
+import "../../styles/admin/admin.css";
+import GoBack from "../../components/admin/GoBack";
+
+const EditForm = () => {
     const navigate = useNavigate();
     const [questions, setQuestions] = useState([]);
     const [form,setForm] = useState([]);
@@ -43,19 +46,23 @@ const EditFormQuestions = () => {
     return (
         <>
             <div className="admin-container">
+                <GoBack  url ={"/admin/admin-dashboard"}/>
                 <h3>{form?.name}</h3>
-
+               
                 {questions.map((question,index) => (
-                    <QuestionCard 
+                    <div  key={index} className="question-card-container">
+                    <QuestionCard  
                     key={question.id}
                     index={index + 1}
                     form = {form}
                     question={question}
                     />
+                   </div>
                 ))}
-            </div>
+                </div>
+           
         </>
     );
 };
 
-export default EditFormQuestions;
+export default EditForm;

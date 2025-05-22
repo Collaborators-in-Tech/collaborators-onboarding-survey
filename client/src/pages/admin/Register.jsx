@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Button from "../components/Button";
-import {API}from "../config/api";
+import Button from "../../components/Button";
+import {API}from "../../config/api";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
