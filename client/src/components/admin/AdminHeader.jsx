@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../config/api";
+import { AuthContext } from "../../context/AuthContext";
 
 const AdminHeader = ({ children ,handleNavigate}) => {
     const storedUser = localStorage.getItem("user");
     const admin = storedUser ? JSON.parse(storedUser) : null;
+    const { logout } = useContext(AuthContext);
     
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
@@ -25,8 +27,9 @@ const AdminHeader = ({ children ,handleNavigate}) => {
         console.log("response is",response);
 
         if (response.ok) {
-            localStorage.removeItem("authToken");
-            localStorage.removeItem("user");
+            logout(); 
+            console.log("lets check local storage now");
+            console.log(localStorage.getItem('user'));
             navigate("/admin");
         } else {
             console.error("Logout failed:", data);

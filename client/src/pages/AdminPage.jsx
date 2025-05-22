@@ -31,51 +31,45 @@ const AdminPage = () => {
   };
 
   return (
-    <main>
+    <main className="admin-main">
       <h2>Admin Dashboard login</h2>
       <Login />
+          <div >
+              <h4>Shareable Form Link</h4>
+              <p>Share this link with users to fill out the form:</p>
 
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      {/* Clipboard icon */}
+      <span
+        data-tooltip-id="copy-tooltip"
+        data-tooltip-content={copied ? "Copied!" : "Copy Link"}
+        onClick={copyToClipboard}
+        style={{
+          cursor: "pointer",
+          fontSize: "24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <FaRegClipboard />
+      </span>
+      <Tooltip id="copy-tooltip" />
 
-      <div >
-          <h4>Shareable Form Link</h4>
-          <p>Share this link with users to fill out the form:</p>
+      {/* Social media icons */}
+      <FacebookShareButton url={API.FORM_LINK} quote={title}>
+        <FacebookIcon size={24} round />
+      </FacebookShareButton>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-  {/* Clipboard icon */}
-  <span
-    data-tooltip-id="copy-tooltip"
-    data-tooltip-content={copied ? "Copied!" : "Copy Link"}
-    onClick={copyToClipboard}
-    style={{
-      cursor: "pointer",
-      fontSize: "24px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    }}
-  >
-    <FaRegClipboard />
-  </span>
-  <Tooltip id="copy-tooltip" />
+      <WhatsappShareButton url={API.FORM_LINK} title={title}>
+        <WhatsappIcon size={24} round />
+      </WhatsappShareButton>
 
-  {/* Social media icons */}
-  <FacebookShareButton url={API.FORM_LINK} quote={title}>
-    <FacebookIcon size={24} round />
-  </FacebookShareButton>
-
-  <WhatsappShareButton url={API.FORM_LINK} title={title}>
-    <WhatsappIcon size={24} round />
-  </WhatsappShareButton>
-
-  <TelegramShareButton url={API.FORM_LINK} title={title}>
-    <TelegramIcon size={24} round />
-  </TelegramShareButton>
-</div>
-
-  </div>
-
-
-
+      <TelegramShareButton url={API.FORM_LINK} title={title}>
+        <TelegramIcon size={24} round />
+      </TelegramShareButton>
+    </div>
+   </div>
 
     </main>
   );
