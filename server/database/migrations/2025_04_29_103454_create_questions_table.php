@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('form_id')->constrained('forms')->onDelete('cascade');
-            $table->string("question_text");
+            $table->text("question_text");
+            $table->text("description")->nullable();
             $table->enum('type',['text','radio','checkbox','boolean']);
             $table->foreignId('depends_on_question_id')->nullable()->constrained('questions')->onDelete('cascade');
             $table->string('depending_value')->nullable();

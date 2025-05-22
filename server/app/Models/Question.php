@@ -14,6 +14,7 @@ class Question extends Model
     protected $fillable = [
         'form_id',
         'question_text',
+        'description',
         'type',
         'depends_on_question_id',
         'depending_value',
