@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import UserList from "./pages/admin/UserList";
 import AddNewForm from "./pages/admin/AddNewForm";
 import AdminList from "./pages/admin/AdminList";
+import { ThankYouPage } from "./pages/ThankYouPage";
 
 function App() {
   return (
