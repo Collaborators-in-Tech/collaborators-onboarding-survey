@@ -10,7 +10,7 @@
   flex-direction: column;
 }
 
-.welcome-title {
+/* .welcome-title {
   font-size: 2.5rem;
   font-weight: 900;
   color: #19212b;
@@ -18,9 +18,9 @@
   margin: 0;
   padding: 0 1.2rem 0 1.2rem;
   text-align: center;
-}
+} */
 
-.color-bar {
+/* .color-bar {
   display: flex;
   width: 100%;
   height: 16px;
@@ -50,45 +50,52 @@
 .color5 {
   background: #e97d3c;
   flex: 1;
-}
+} */
 
 .welcome-container {
   background: none;
   border-radius: 0;
-  padding: 0;
-  max-width: 500px;
   margin: 0 auto;
   box-shadow: none;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  min-height: 800vh;
   justify-content: flex-start;
+  padding: 3rem 2rem;
 }
 
 .welcome-content {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 6rem 3rem 6rem 3rem;
+  max-width: 326px;
   background: none;
   box-shadow: none;
 }
 
 .welcome-text {
   color: #fff;
-  font-size: 3.4rem;
+  font-size: 2.1rem;
   text-align: left;
   line-height: 1.18;
-  margin-bottom: 2.5rem;
-  margin-top: 1rem;
   font-weight: 200;
   font-family: "Inter", Arial, sans-serif;
   width: 100%;
   max-width: 100%;
 }
 
-button {
+.welcome-text + .welcome-text {
+  margin-top: 24px;
+}
+
+.welcome-image {
+  width: 131px;
+  margin: 60px auto 0 auto;
+  display: block;
+}
+
+.welcome-image + button {
+  margin-top: 60px;
+}
+
+/* button {
   width: 100%;
   max-width: 350px;
   min-width: 0;
@@ -100,44 +107,32 @@ button {
   border: none;
   border-radius: 0 !important;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
   text-align: center;
-  margin: 2.5rem auto 0 auto;
+  margin: 60px auto 0 auto;
   display: block;
 }
 button:hover {
   background: #7c6fc4 !important;
   color: #fff !important;
+} */
+
+@media (min-width: 600px) {
+  .welcome-container {
+    padding: 6rem 4rem;
+  }
+
+  .welcome-content {
+    max-width: 1024px;
+  }
+
+  .welcome-text {
+    font-size: 3.4rem;
+  }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 900px) {
   .welcome-container {
-    padding: 0;
-    max-width: 100vw;
-    border-radius: 0;
-  }
-  .welcome-header {
-    border-radius: 0;
-    padding-top: 1.2rem;
-  }
-  .welcome-title {
-    font-size: 2rem;
-    padding: 0 0.7rem 0 0.7rem;
-  }
-  .color-bar {
-    height: 12px;
-  }
-  .welcome-content {
-    padding: 4rem 1.5rem 4rem 1.5rem;
-  }
-  .welcome-text {
-    font-size: 2.1rem;
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
-  }
-  button {
-    font-size: 1.1rem;
-    padding: 1rem 0;
-    margin-top: 2rem;
+    padding: 12rem 4rem;
   }
 }

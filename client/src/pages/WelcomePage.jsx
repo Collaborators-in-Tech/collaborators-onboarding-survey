@@ -1,5 +1,6 @@
 import React from "react";
 import GoToFormButton from "../components/GoToFormButton";
+import globe from "../assets/globe.svg";
 import "./WelcomePage.css";
 
 const WelcomePage = () => {
@@ -7,13 +8,10 @@ const WelcomePage = () => {
     <main className="welcome-container">
       <div className="welcome-content">
         <p className="welcome-text">
-          Join our community
-          <br />
-          of professionals in IT, design and communication.
-          <br />
-          <br />
-          Help us in our world domination!
+          Join our community of professionals in IT, design and communication.
         </p>
+        <p className="welcome-text">Help us in our world domination!</p>
+        <img className="welcome-image" src={globe} alt="" aria-hidden />
         <GoToFormButton />
       </div>
     </main>
