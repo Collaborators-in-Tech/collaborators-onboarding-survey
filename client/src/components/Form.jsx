@@ -61,6 +61,7 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Submitted:", formData);
+    navigate("/thank");
   };
 
   if (loading) return <div> Loading questions...</div>;
