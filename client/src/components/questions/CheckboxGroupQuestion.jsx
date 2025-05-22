@@ -43,11 +43,11 @@ const CheckboxGroupQuestion = ({
           </label>
         ))}
         {showOtherInput && (
-          <div style={{ width: "100%" }}>
+          <div style={{ width: "100%", marginTop: "1rem" }}>
             <label
               style={{
                 color: "#fff",
-                fontSize: "1.1rem",
+                fontSize: "1rem",
                 marginBottom: 8,
                 display: "block",
               }}

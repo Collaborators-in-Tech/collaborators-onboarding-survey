@@ -194,7 +194,7 @@ const Form = () => {
   return (
     <div className="form-container">
       <h2 className="form-title">{steps[step].title}</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         {steps[step].questions.map((q) => {
           if (q.type === "short-text") {
             return (
