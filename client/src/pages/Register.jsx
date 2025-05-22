@@ -2,7 +2,6 @@ import { useState } from "react";
 import Button from "../components/Button";
 import {API}from "../config/api";
 import { useNavigate } from "react-router-dom";
-import AdminHeader from "../components/admin/adminHeader";
 
 const Register = () => {
     const [name,setName] = useState("");
@@ -39,7 +38,6 @@ const Register = () => {
     }
     return(
         <>
-            <header> <AdminHeader handleNavigate = {handleNavigate}>Back to Dashboard </AdminHeader></header>
             <div className="admin-container">
                 <h3>Register new admin</h3>
                 <form onSubmit={handleSubmit}>

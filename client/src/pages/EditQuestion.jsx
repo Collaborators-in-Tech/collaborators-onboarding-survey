@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../config/api";
-import AdminHeader from "../components/admin/adminHeader";
 import QuestionEditor from "../components/admin/QuestionEditor";
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -51,9 +50,6 @@ const EditQuestion = () => {
 
     return (
         <>
-            <header>
-                <AdminHeader handleNavigate={handleNavigate}><FaArrowLeft/></AdminHeader>
-            </header>
             <main className="admin-container">
                 <div className="edit-card">
                     <QuestionEditor question = {question} formId={formId}/>                            

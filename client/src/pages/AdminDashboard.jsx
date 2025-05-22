@@ -1,7 +1,4 @@
 
-import Logout from "../components/Logout";
-import Register from "./Register";
-import AdminHeader from "../components/admin/adminHeader";
 import "../styles/admin.css";
 import UserList from "../components/admin/UserList";
 import Button from "../components/Button";
@@ -18,8 +15,8 @@ const AdminDashboard = () => {
 
   return (
     <>
-    <header> <AdminHeader>Admin Dashboard</AdminHeader></header>
-    <main className="admin-container">
+   
+    <main className="admin-main">
       <Button onClick={registerAdmin}> Register new admin</Button>
       <Button onClick={editForm}> Edit form Questions</Button>
       <UserList /> 

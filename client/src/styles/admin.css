@@ -8,10 +8,10 @@
   align-items: stretch;
 
 }
-.admin-container{
+/* .admin-container{
     margin-top: 100px;
     padding: 0 16px;
-}
+} */
 .user-list {
     display: flex;
     flex-direction: column;

@@ -1,35 +1,84 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import "./Header.css";
 import { FaBars } from "react-icons/fa";
 import { AuthContext } from "../context/AuthContext"; 
+import { useNavigate } from "react-router-dom";
+import { API } from "../config/api";
 
 const Header = () => {
-  const {user} = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
-  return(
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem("authToken");
+    console.log("token: ", token);
+
+    try {
+      const response = await fetch(API.LOGOUT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("response is", response);
+      // const data = await response.json();
+
+      if (response.ok) {
+        logout();    // Clear auth context & localStorage
+        console.log("lets check local storage now");
+        console.log(localStorage.getItem('user'));
+        navigate("/admin");
+      } else {
+        console.error("Logout failed");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
+  return (
     <header className="main-header">
       <div className="main-header-icons"> 
         <h1 className="main-header-title">COLLABORATORS</h1>
+        
         {user && (
-          <span className="menu-icon">
-            <FaBars />
-          </span>
+          <div className="menu-wrapper" ref={dropdownRef}>
+            <span className="menu-icon" onClick={() => setShowDropdown(prev => !prev)}>
+              <FaBars />
+            </span>
+
+            {showDropdown && (
+              <div className="menu-dropdown">
+                <p className="dropdown-username">{user?.name}</p>
+                <button onClick={handleLogout} className="dropdown-logout">Logout</button>
+              </div>
+            )}
+          </div>
         )}
       </div>
 
       <div className="main-header-bar">
-        <div className="bar0"></div>
-        <div className="bar1"></div>
-        <div className="bar2"></div>
-        <div className="bar3"></div>
-        <div className="bar4"></div>
-        <div className="bar5"></div>
-        <div className="bar6"></div>
-        <div className="bar7"></div>
+        {[...Array(8)].map((_, i) => (
+          <div key={i} className={`bar${i}`}></div>
+        ))}
       </div>
     </header>
   );
-}
-
+};
 
 export default Header;

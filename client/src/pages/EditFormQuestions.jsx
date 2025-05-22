@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import AdminHeader from "../components/admin/adminHeader";
 import { useEffect, useState } from "react";
 import { API } from "../config/api";
 import QuestionCard from "../components/admin/QuestionCard";
@@ -43,9 +42,6 @@ const EditFormQuestions = () => {
 
     return (
         <>
-            <header>
-                <AdminHeader handleNavigate={handleNavigate}><FaArrowLeft/></AdminHeader>
-            </header>
             <div className="admin-container">
                 <h3>{form?.name}</h3>
 

@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import AdminHeader from "./adminHeader";
+
 
 const UserDetails = () => {
   const location = useLocation();
@@ -15,9 +15,7 @@ const UserDetails = () => {
 
   return (
     <>
-    <header>
-        <AdminHeader handleNavigate={handleNavigate}>Back to Dashboard</AdminHeader>
-    </header>
+   
     <main className="admin-container">
       <h2>User Details</h2>
       <p><strong>Name:</strong> {user.name}</p>
