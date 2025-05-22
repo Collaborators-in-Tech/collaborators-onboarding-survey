@@ -9,8 +9,11 @@ import ProtectedRoute from "./components/admin/ProtectedRoute";
 import EditFormQuestions from "./pages/EditFormQuestions";
 import Register from "./pages/Register";
 import EditQuestion from "./pages/EditQuestion";
+import Header from "./components/Header";
 function App() {
   return (
+    <>
+    <Header />
     <Routes>
       <Route path="/" element={<WelcomePage />} />
       <Route path="/form" element={<FormPage />} />
@@ -59,7 +62,11 @@ function App() {
       />
       <Route path="*" element={<NotFound />} />
     </Routes>
+    </>
   );
 }
 
 export default App;
+
+
+
