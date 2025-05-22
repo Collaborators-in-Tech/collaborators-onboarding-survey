@@ -1,5 +1,3 @@
-import React from "react";
-
 const SelectQuestion = ({
   label,
   description,
@@ -9,30 +7,36 @@ const SelectQuestion = ({
   placeholder = "Choose an option",
   name,
   options = [],
-}) => (
-  <div className="question select-question">
-    <label className="question-label">
-      {label}
-      {required && <span style={{ color: "#f3c846", marginLeft: 4 }}>*</span>}
-    </label>
-    {description && <div className="question-description">{description}</div>}
-    <select
-      className="question-input"
-      name={name}
-      value={value}
-      onChange={onChange}
-      required={required}
-    >
-      <option value="" disabled>
-        {placeholder}
-      </option>
-      {options.map((opt) => (
-        <option key={opt.value} value={opt.value}>
-          {opt.label}
+}) => {
+
+  console.log("Options", options);
+
+  return (
+    <div className="question select-question">
+      <label className="question-label">
+        {label}
+        {required && <span style={{ color: "#f3c846", marginLeft: 4 }}>*</span>}
+      </label>
+      {description && <div className="question-description">{description}</div>}
+      <select
+        className="question-input"
+        name={name}
+        value={value}
+        onChange={onChange}
+        required={required}
+      >
+        <option value="" disabled>
+          {placeholder}
         </option>
-      ))}
-    </select>
-  </div>
-);
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.value}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
 
 export default SelectQuestion;

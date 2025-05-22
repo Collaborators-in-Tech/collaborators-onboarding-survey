@@ -25,21 +25,23 @@ const CheckboxGroupQuestion = ({
 
   const showOther = showOtherInput && values.includes("other");
 
+  console.log("Options", options[0]);
+
   return (
     <div className="question checkbox-group-question">
       <label className="question-label">{label}</label>
       {description && <div className="question-description">{description}</div>}
       <div className="checkbox-group">
         {options.map((opt) => (
-          <label key={opt.value} className="checkbox-option">
+          <label key={opt} className="checkbox-option">
             <input
               type="checkbox"
               name={name}
-              value={opt.value}
-              checked={values.includes(opt.value)}
+              value={opt}
+              checked={values.includes(opt)}
               onChange={handleCheckboxChange}
             />
-            <span>{opt.label}</span>
+            <span>{opt}</span>
           </label>
         ))}
         {showOtherInput && (
