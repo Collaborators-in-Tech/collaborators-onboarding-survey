@@ -66,7 +66,7 @@ const Form = () => {
   if (loading) return <div> Loading questions...</div>;
   if (!apiData || apiData.questions.length == 0 || !apiData.questions[step])
     return <div> Loading...</div>;
-  console.log(apiData.questions[step]);
+  console.log("Length: ",apiData.questions.length -1, "Step: ", step);
 
   return (
     <div className="form-container">
@@ -124,7 +124,7 @@ const Form = () => {
           <button type="button" onClick={handleBack}>
             Back
           </button>
-          {step < apiData.questions.length - 1 ? (
+          {step < apiData.questions.length - 2 ? (
             <button type="button" className="next" onClick={handleNext}>
               Next
             </button>

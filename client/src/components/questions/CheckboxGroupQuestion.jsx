@@ -25,8 +25,6 @@ const CheckboxGroupQuestion = ({
 
   const showOther = showOtherInput && values.includes("other");
 
-  console.log("Options", options[0]);
-
   return (
     <div className="question checkbox-group-question">
       <label className="question-label">{label}</label>
