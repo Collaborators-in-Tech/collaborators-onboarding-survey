@@ -15,6 +15,12 @@ const AdminDashboard = () => {
     const userSubmissions = () => {
       navigate("/admin/users-list")
     }
+    const addForm = () => {
+      navigate("/admin/add-form")
+    }
+    const adminList = () => {
+      navigate("/admin/admins-list")
+    }
 
   return (
     <>
@@ -23,7 +29,7 @@ const AdminDashboard = () => {
       <div className="box-container">
          <h3>create new form</h3>
          <div className="box">
-          <div className="icon-box"> <FaPlus className="plus-icon"/></div>
+          <div className="icon-box" onClick={addForm} > <FaPlus className="plus-icon"/></div>
          </div>
       </div>
       <div className="divider-line"></div>
@@ -38,7 +44,7 @@ const AdminDashboard = () => {
          <h3>Manage admin</h3>
          <div className="box">
            <div ><div className="icon-box" onClick={registerAdmin}>  <FaPlus className="plus-icon"/> </div>New admin</div> 
-            <div><div className="icon-box">  <FaList /></div>admin list </div>    
+            <div><div className="icon-box" onClick={adminList}>  <FaList /></div>admin list </div>    
          </div> 
       </div>
       <div className="divider-line"></div>
