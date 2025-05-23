@@ -26,10 +26,10 @@ class FormSubmissionAnswerSeeder extends Seeder
 
         $sampleData = [
             [
-                'email' => 'test2@example.com',
+                'email' => 'test1@example.com',
                 'consent_given' => true,
                 'answers' => [
-                    1 => 'John Doe',
+                    1 => 'user1 test',
                     2 => 'Front End Developer',
                     3 => 'Coaching',
                     4 => 'I am not sure yet',
@@ -38,22 +38,22 @@ class FormSubmissionAnswerSeeder extends Seeder
                     7 => '4-6',
                     8 => ':)',
                     9 => 'Nej',
-                    10 => 'test2@example.com',
+                    10 => 'test1@example.com',
                     11 => true,
                 ],
             ],
             [
-                'email' => 'test3@example.com',
+                'email' => 'test2@example.com',
                 'consent_given' => true,
                 'answers' => [
-                    1 => 'John Doe',
+                    1 => 'user2 test',
                     2 => 'Front End Developer',
                     3 => 'Coaching',
                     4 => 'I am not sure yet',
                     5 => 'Nätverka',
                     8 => ':)',
                     9 => 'Nej',
-                    10 => 'test3@example.com',
+                    10 => 'test2@example.com',
                     11 => true,
                 ],
             ],
