@@ -1,34 +1,30 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import GoBack from "./GoBack";
 
 
 const UserDetails = () => {
   const location = useLocation();
   const { user } = location.state || {};
-  const admin = JSON.parse(localStorage.getItem("user"));
-  const navigate = useNavigate();
-
-  const handleNavigate = () => {
-      navigate("/admin/admin-dashboard");
-  };
-
   if (!user) return <p>No user data found.</p>;
 
   return (
     <>
-   
-    <main className="admin-container">
+    <GoBack url={"/admin/users-list"} />
+    <main>
       <h2>User Details</h2>
-      <p><strong>Name:</strong> {user.name}</p>
-      <p><strong>Email:</strong> {user.email}</p>
-      <p><strong>Consent:</strong> {user.consent_given ? "Yes" : "No"}</p>
+      <h3><strong>Name:</strong> {user.name}</h3>
+      <h3><strong>Email:</strong> {user.email}</h3>
+      <div  className="admin-container">
       <h3>Answers:</h3>
-      <ul>
+      
         {user.answers.map((a, i) => (
-          <li key={i}>
-            <strong>{a.question}:</strong> {a.answer}
-          </li>
+          <div key={i} className="question-card">
+            <p className="que"><strong>{a.question}:</strong></p>
+            <p className="ans"> {a.answer}</p>
+          </div>
         ))}
-      </ul>
+      
+      </div>
     </main>
     </>
   );
