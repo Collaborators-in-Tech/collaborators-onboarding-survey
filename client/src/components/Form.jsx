@@ -43,7 +43,7 @@ const Form = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // handleNext should also check if required fields are filled.
+  // handleNext should also check if required fields are filled. Not implemented yet.
   const handleNext = () => {
     if (step < apiData.questions.length - 1) {
       setStep((prev) => prev + 1);
@@ -58,6 +58,7 @@ const Form = () => {
     }
   };
 
+  // A consent checkbox need to be implemented for the posting
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Submitted:", formData);
