@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import SubmitButton from "./SubmitButton";
-import ShortTextQuestion from "./questions/ShortTextQuestion";
-import SelectQuestion from "./questions/SelectQuestion";
-import CheckboxGroupQuestion from "./questions/CheckboxGroupQuestion";
-import "../styles/form/form.css";
+import SubmitButton from "../SubmitButton";
+import ShortTextQuestion from "../questions/ShortTextQuestion";
+import SelectQuestion from "../questions/SelectQuestion";
+import CheckboxGroupQuestion from "../questions/CheckboxGroupQuestion";
+import "../../styles/form/form.css";
 
 const Form = () => {
   const [step, setStep] = useState(0);

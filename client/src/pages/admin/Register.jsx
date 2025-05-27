@@ -1,81 +1,105 @@
 import { useState } from "react";
 import Button from "../../components/Button";
-import {API}from "../../config/api";
+import { API } from "../../config/api";
 import { useNavigate } from "react-router-dom";
 import GoBack from "../../components/admin/GoBack";
+import SuccessModal from "../../components/modals/SuccessModal";
+
 
 const Register = () => {
-    const [name,setName] = useState("");
-    const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("");
-    const [isOpen,setIsOpen] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [showModal, setShowModal] = useState(false);
+
     const navigate = useNavigate();
 
-    const handleRegister = () => {
-        setIsOpen(!isOpen);
-    }
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-            const respnse = await fetch(API.REGISTER,{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json",
+        setError("");
+        try {
+            const response = await fetch(API.REGISTER, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
                 },
-                body:JSON.stringify({email,name,password})
+                body: JSON.stringify({ email, name, password }),
             });
-            const data = await respnse.json();
-            console.log("data---->",data);
-            navigate("/admin/admin-dashboard");
 
-        }catch(error){
-            console.error("Error registering the user: ",error);
+            const data = await response.json();
+
+            if (response.ok) {
+                setShowModal(true); // Show success modal
+            } else {
+                setError(data.message || "Registration failed.");
+            }
+
+        } catch (error) {
+            console.error("Error registering the user: ", error);
+            setError("Something went wrong. Please try again.");
         }
-    }
-    
-    return(
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        navigate("/admin/admin-dashboard");
+    };
+
+    return (
         <>
             <GoBack url={"/admin/admin-dashboard"} />
             <h3>Register new admin</h3>
+
             <div className="admin-container">
-                
+                {error && <div className="error-message">{error}</div>}
+
                 <form onSubmit={handleSubmit}>
                     <div>
                         <input
-                        className="question-input"
-                        type="text" 
-                        name="name" 
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Name"
-                        required />
-                    </div>
-                    <div>
-                        <input 
-                        className="question-input"
-                        type="email" 
-                        name="email" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
-                        required />
-                    </div>
-                    <div>
-                        <input 
                             className="question-input"
-                            type="password" 
-                            name="password" 
+                            type="text"
+                            name="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Name"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <input
+                            className="question-input"
+                            type="email"
+                            name="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Email"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <input
+                            className="question-input"
+                            type="password"
+                            name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="password"
-                            required />
+                            placeholder="Password"
+                            required
+                        />
                     </div>
-                    <Button  type="submit" >Submit</Button>
+                    <Button type="submit">Submit</Button>
                 </form>
             </div>
-        
-        </>
-    )
 
-}
+            {showModal && (
+                <SuccessModal
+                    message="Admin registered successfully!"
+                    onClose={handleCloseModal}
+                />
+            )}
+        </>
+    );
+};
+
 export default Register;

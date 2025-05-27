@@ -1,6 +1,6 @@
 import React from "react";
-import GoToFormButton from "../../components/GoToFormButton";
 import "../../styles/WelcomePage.css";
+import GoToFormButton from "../../components/form/GoToFormButton";
 
 const WelcomePage = () => {
   return (

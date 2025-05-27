@@ -8,6 +8,7 @@ const QuestionEditor = ({ question, formId }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     question_text: "",
+    description: "",
     type: "text",
     is_required: 0,
     options: [],
@@ -34,6 +35,7 @@ const QuestionEditor = ({ question, formId }) => {
   
     setFormData({
       question_text: question.question_text || "",
+      description:question.description || "",
       type: question.type || "text",
       is_required: question.is_required || 0,
       options: parsedOptions,
@@ -131,6 +133,19 @@ const QuestionEditor = ({ question, formId }) => {
           className="question-textarea"
           rows={4}
         />
+       {formData.description && (
+            <>
+              <label>Description</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                className="question-textarea"
+                rows={4}
+              />
+            </>
+          )}
+
 
         {/* <label>Type</label>
         <select
