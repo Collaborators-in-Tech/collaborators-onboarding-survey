@@ -29,6 +29,7 @@ Route::prefix('form')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->middleware(['auth:sanctum','superadmin']);
+    Route::delete('/delete-admin/{id}',[AuthController::class,'deleteAdmin'])->middleware('auth:sanctum','superadmin');
     Route::get('/admin-list',[AuthController::class,'getAdmins'])->middleware('auth:sanctum');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     // Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');

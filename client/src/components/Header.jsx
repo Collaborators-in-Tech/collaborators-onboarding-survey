@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { API } from "../config/api";
 
 const Header = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout,token } = useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
@@ -23,7 +23,6 @@ const Header = () => {
   }, []);
 
   const handleLogout = async () => {
-    const token = localStorage.getItem("authToken");
     console.log("token: ", token);
 
     try {
@@ -36,7 +35,6 @@ const Header = () => {
       });
 
       console.log("response is", response);
-      // const data = await response.json();
 
       if (response.ok) {
         logout();    // Clear auth context & localStorage

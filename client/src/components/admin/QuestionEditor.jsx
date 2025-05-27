@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaPlus, FaRecycle, FaTrash } from "react-icons/fa";
 import {API} from '../../config/api';
 import { useNavigate } from "react-router-dom";
 import "../../styles/admin/edit-question.css";
+import { AuthContext } from "../../context/AuthContext";
 
 const QuestionEditor = ({ question, formId }) => {
+  const {token} = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     question_text: "",
@@ -99,7 +101,7 @@ const QuestionEditor = ({ question, formId }) => {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(payload),
         });

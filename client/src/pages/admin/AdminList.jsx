@@ -7,14 +7,14 @@ import { AuthContext } from "../../context/AuthContext";
 const AdminList = () => {
   const [adminList, setAdminList] = useState([]);
   const [superAdmin,setSuperAdmin] = useState(false);
-  const {user} = useContext(AuthContext);
+  const {user,token} = useContext(AuthContext);
 
   useEffect(() => {
     fetch(API.GET_ADMINS, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => {
@@ -36,8 +36,18 @@ const AdminList = () => {
   }, []);
 
   const handleDelete = (id) => {
-    // Add confirmation and delete logic here
-    console.log("Delete admin with ID:", id);
+    fetch(API.DELETE_ADMIN(id),{
+        method: "DELETE",
+        headers: {
+            Authorization : `Bearer ${token}`,
+
+        },
+    }).then((res) =>{
+        if(!res.ok) throw new Error("Failed to delete admin");
+        setAdminList(adminList.filter((admin) => admin.id != id));
+    }).catch((error) => {
+        console.error("Delete Error: ",error);
+    })
   };
 
   return (

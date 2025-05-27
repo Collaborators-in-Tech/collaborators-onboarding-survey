@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import { Navigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("authToken");
+  const {token} = useContext(AuthContext);
   return token ? children : <Navigate to="/admin" />;
 };
 

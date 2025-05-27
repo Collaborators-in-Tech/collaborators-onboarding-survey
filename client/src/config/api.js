@@ -15,5 +15,6 @@ export const API = {
   POST_ANSWERS: `${BASE_URL}/form/answers`,
   GET_ANSWERS: `${BASE_URL}/form/answers`,
   DELETE_USER: (id) =>`${BASE_URL}/admin/delete-user/${id}`,
+  DELETE_ADMIN: (id) =>`${BASE_URL}/admin/delete-admin/${id}`,
 
 };

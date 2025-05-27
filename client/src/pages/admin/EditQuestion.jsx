@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../../config/api";
 import QuestionEditor from "../../components/admin/QuestionEditor";
 import { FaArrowLeft } from "react-icons/fa";
 import GoBack from "../../components/admin/GoBack";
+import { AuthContext } from "../../context/AuthContext";
+
 
 const EditQuestion = () => {
     const { formId, questionId } = useParams();
@@ -11,6 +13,7 @@ const EditQuestion = () => {
     const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const {token} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleNavigate = () => {
@@ -24,7 +27,7 @@ const EditQuestion = () => {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 });
 

@@ -1,21 +1,23 @@
 import {API}  from "../../config/api"
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaEye, FaInfoCircle, FaTrashAlt } from "react-icons/fa";
 import "../../styles/admin/admin.css";
 import GoBack from "../../components/admin/GoBack";
+import { AuthContext } from "../../context/AuthContext";
 
 
 const UserList = () =>{
     const [formsList, setFormsList] = useState([]);
     const navigate = useNavigate();
+    const {token} = useContext(AuthContext);
    
     useEffect(() => {
       fetch(API.GET_ANSWERS, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`, 
+          Authorization: `Bearer ${token}`, 
         },
       })
         .then((res) => {
@@ -40,7 +42,7 @@ const UserList = () =>{
       fetch(API.DELETE_USER(id),{
           method: "DELETE",
           headers: {
-              Authorization : `Bearer ${localStorage.getItem("authToken")}`,
+              Authorization : `Bearer ${token}`,
   
           }, 
       }).then((res) => {

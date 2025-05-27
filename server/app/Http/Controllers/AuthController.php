@@ -82,4 +82,15 @@ class AuthController extends Controller
         return response()->json($admins);
 
     }
+    public function deleteAdmin($id){
+        $admin = User::find($id);
+        if (!$admin) {
+            return response()->json(['message' => 'Admin not found'], 404);
+        }
+    
+        $admin->delete();
+    
+        return response()->json(['message' => 'admin deleted successfully']);
+
+    }
 }

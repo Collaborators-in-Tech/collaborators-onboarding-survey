@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../../components/Button";
 import { API } from "../../config/api";
 import { useNavigate } from "react-router-dom";
 import GoBack from "../../components/admin/GoBack";
 import SuccessModal from "../../components/modals/SuccessModal";
+import { AuthContext } from "../../context/AuthContext";
 
 
 const Register = () => {
@@ -12,6 +13,7 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const {token} = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ const Register = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                    Authorization: `Bearer ${token}`,
 
                 },
                 body: JSON.stringify({ email, name, password }),
