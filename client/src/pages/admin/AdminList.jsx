@@ -3,13 +3,17 @@ import GoBack from "../../components/admin/GoBack";
 import { API } from "../../config/api";
 import { FaTrashAlt } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
+import SuccessModal from "../../components/modals/SuccessModal";
 
 const AdminList = () => {
   const [adminList, setAdminList] = useState([]);
   const [superAdmin,setSuperAdmin] = useState(false);
   const {user,token} = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
+    setError("");
     fetch(API.GET_ADMINS, {
       method: "GET",
       headers: {
@@ -36,6 +40,7 @@ const AdminList = () => {
   }, []);
 
   const handleDelete = (id) => {
+    setError("");
     fetch(API.DELETE_ADMIN(id),{
         method: "DELETE",
         headers: {
@@ -43,11 +48,21 @@ const AdminList = () => {
 
         },
     }).then((res) =>{
-        if(!res.ok) throw new Error("Failed to delete admin");
+        if(!res.ok) {
+            setShowModal(false);
+            setError("Failed to delete admin.");
+            throw new Error("Failed to delete admin");
+        }
         setAdminList(adminList.filter((admin) => admin.id != id));
+        setShowModal(true);
     }).catch((error) => {
         console.error("Delete Error: ",error);
+        setError("Something went wrong. Please try again.");
     })
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -55,6 +70,7 @@ const AdminList = () => {
       <GoBack url={"/admin/admin-dashboard"} />
       <h3>The Admins List</h3>
       <div className="admin-list">
+        {error && <div className="error-message">{error}</div>}
         {adminList.length > 0 ? (
           <>
             <div className="admin-list-header">
@@ -77,6 +93,12 @@ const AdminList = () => {
           <p>No admins found in database.</p>
         )}
       </div>
+      {showModal && (
+        <SuccessModal
+            message="Admin deleted successfully!"
+            onClose={handleCloseModal}
+        />
+     )}
     </>
   );
 };
