@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function register(Request $request){
+        info("here in the register controller.....");
+        info($request);
         $userData =  $request->validate([
             'email' => ['required','email','unique:users'],
             'name' => 'required',

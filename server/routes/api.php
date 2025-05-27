@@ -13,7 +13,10 @@ Route::middleware('auth:sanctum')->put('/form/question/{formId}/{questionId}', [
 Route::post('/form/answers', [AnswersController::class, 'postAnswers']);
 Route::middleware('auth:sanctum')->get('/form/answers', [AnswersController::class, 'getAnswers']);
 
-Route::post("/register", [AuthController::class, 'register']);
+// Route::post("/register", [AuthController::class, 'register']);
+
+Route::middleware(['auth:sanctum', 'superadmin'])->post("/register", [AuthController::class, 'register']);
+
 Route::post('/login', [AuthController::class, 'login'])->name('login');  // Add name('login')
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('auth:sanctum')->post('/update-password', [AuthController::class, 'updatePassword']);
