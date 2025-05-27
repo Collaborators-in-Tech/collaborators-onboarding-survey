@@ -77,4 +77,9 @@ class AuthController extends Controller
             'message' => 'Password updated successfully!'
         ]);
     }
+    public function getAdmins(){
+        $admins = User::all();
+        return response()->json($admins);
+
+    }
 }

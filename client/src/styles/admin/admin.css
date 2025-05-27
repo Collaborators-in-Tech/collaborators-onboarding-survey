@@ -67,8 +67,30 @@
   }
   /*___________________________UserDetails__________________________*/
 
-  .que{
-    margin-bottom: 5px;
+  .admin-list {
+    max-width: 800px;               /* Fixed width */
+    margin: 10px auto;          /* Center horizontally */
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    
+    .admin-list-header,
+    .admin-list-row {
+      display: grid;
+      grid-template-columns: 2fr 4fr 2fr 1fr;
+      padding: 10px;
+      border: 1px solid #ccc;
+      align-items: center;
+      background-color: #f9f9f9;
+    }
+
+  /*________________________AdminList______________________________*/
+  .admin-list-card{
+    display: flex;
+    justify-content: space-between;
+
   }
 
  /* _______________________EditForm___________________________________ */
