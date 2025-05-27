@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
-    public function getQuestions(){
-        $form_id = env('DEFAULT_FORM_ID');
-        $form = Form::findOrFail($form_id);
-        $questions = Question::where('form_id',$form_id)
+    public function getQuestions($formId){
+        // $form_id = env('DEFAULT_FORM_ID');
+        $form = Form::findOrFail($formId);
+        $questions = Question::where('form_id',$formId)
         ->orderBy('sort_order')
         ->get();
         return response()->json([

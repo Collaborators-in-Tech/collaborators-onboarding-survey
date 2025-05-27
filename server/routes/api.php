@@ -6,17 +6,10 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 
-// Route::get('/form/questions', [FormController::class, 'getQuestions']);
-// Route::middleware('auth:sanctum')->get('/form/question/{formId}/{questionId}', [FormController::class, 'getQuestion']);
-// Route::middleware('auth:sanctum')->put('/form/question/{formId}/{questionId}', [FormController::class, 'updateQuestion']);
-
-// Route::post('/form/answers', [AnswersController::class, 'postAnswers']);
-// Route::middleware('auth:sanctum')->get('/form/answers', [AnswersController::class, 'getAnswers']);
-
 Route::prefix('form')->group(function () {
     // Publicly accessible
-    Route::get('/questions', [FormController::class, 'getQuestions']);
-    Route::post('/answers', [AnswersController::class, 'postAnswers']);
+    Route::get('/{formId}/questions', [FormController::class, 'getQuestions']);
+    Route::post('/{formId}/answers', [AnswersController::class, 'postAnswers']);
 
     // Routes that require authentication
     Route::middleware('auth:sanctum')->group(function () {

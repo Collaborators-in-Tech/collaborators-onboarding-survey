@@ -5,6 +5,7 @@ import ShortTextQuestion from "../questions/ShortTextQuestion";
 import SelectQuestion from "../questions/SelectQuestion";
 import CheckboxGroupQuestion from "../questions/CheckboxGroupQuestion";
 import "../../styles/form/form.css";
+import {API} from "../../config/api";
 
 const Form = () => {
   const [step, setStep] = useState(0);
@@ -24,7 +25,7 @@ const Form = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/form/questions")
+    fetch(API.GET_QUESTIONS(1))
       .then((res) => res.json())
       .then((data) => {
         setApiData(data);
