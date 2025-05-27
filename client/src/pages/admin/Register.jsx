@@ -23,6 +23,8 @@ const Register = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+
                 },
                 body: JSON.stringify({ email, name, password }),
             });
@@ -34,7 +36,8 @@ const Register = () => {
             } else {
                 setError(data.message || "Registration failed.");
             }
-
+            console.log("_______response in register______");
+            console.log(response);
         } catch (error) {
             console.error("Error registering the user: ", error);
             setError("Something went wrong. Please try again.");
