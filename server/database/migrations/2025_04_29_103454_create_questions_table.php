@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text("question_text");
             $table->text("description")->nullable();
             $table->enum('type',['text','radio','checkbox','boolean']);
-            $table->foreignId('depends_on_question_id')->nullable()->constrained('questions')->onDelete('cascade');
+            $table->boolean('depends_on_question')->default(false);
             $table->string('depending_value')->nullable();
             $table->integer('sort_order');
             $table->boolean('is_required');

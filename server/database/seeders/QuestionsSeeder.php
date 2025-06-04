@@ -21,7 +21,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'text',
                 'is_required' => true,
                 'sort_order' => 1,
-                'depends_on_question_id' => null,
+                'depends_on_question' => false,
                 'depending_value' => null,
                 'options' => null
             ],
@@ -32,7 +32,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'text',
                 'is_required' => true,
                 'sort_order' => 2,
-                'depends_on_question_id' => null,
+                'depends_on_question' => false,
                 'depending_value' => null,
                 'options' => null
             ],
@@ -43,7 +43,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'text',
                 'is_required' => true,
                 'sort_order' => 3,
-                'depends_on_question_id' => null,
+                'depends_on_question' => false,
                 'depending_value' => null,
                 'options' => null
             ],
@@ -54,7 +54,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'text',
                 'is_required' => true,
                 'sort_order' => 4,
-                'depends_on_question_id' => null,
+                'depends_on_question' => false,
                 'depending_value' => null,
                 'options' => null
                 
@@ -67,7 +67,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'checkbox',
                 'is_required' => true,
                 'sort_order' => 5,
-                'depends_on_question_id' => null,
+                'depends_on_question' => false,
                 'depending_value' => null,
                 'options' => json_encode(['Nätverka','Nätverka & Bygga project']),
             ],
@@ -78,7 +78,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'checkbox',
                 'is_required' => true,
                 'sort_order' => 6,
-                'depends_on_question_id' => 5,  // Depends on the "reason for joining" question
+                'depends_on_question' => true,  // Depends on the "reason for joining" question
                 'depending_value' => 'Nätverka & Bygga project',
                 'options' => json_encode(['Heldag','Förmiddagt','Eftermiddag','Kvällar','Helger']),
             ],
@@ -89,7 +89,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'checkbox',
                 'is_required' => true,
                 'sort_order' => 7,
-                'depends_on_question_id' => 5,  
+                'depends_on_question' => true,  
                 'depending_value' => 'Nätverka & Bygga project',
                 'options' => json_encode(['1-3','4-6','6 <']),
             ],
@@ -100,7 +100,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'text',
                 'is_required' => false,
                 'sort_order' => 8,
-                'depends_on_question_id' => null,
+                'depends_on_question' => false,
                 'depending_value' => null,
                 'options' => null
             ],
@@ -112,7 +112,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'text',
                 'is_required' => false,
                 'sort_order' => 9,
-                'depends_on_question_id' => null, 
+                'depends_on_question' => false, 
                 'depending_value' => null,
                 'options' => null
             ],
@@ -123,7 +123,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'text',
                 'is_required' => true,
                 'sort_order' => 10,
-                'depends_on_question_id' => null, 
+                'depends_on_question' => false, 
                 'depending_value' => null,
                 'options' => null
             ],
@@ -134,7 +134,7 @@ class QuestionsSeeder extends Seeder
                 'type' => 'boolean',
                 'is_required' => true,
                 'sort_order' => 11,
-                'depends_on_question_id' => null,
+                'depends_on_question' => false,
                 'depending_value' => null,
                 'options' => null
             ],

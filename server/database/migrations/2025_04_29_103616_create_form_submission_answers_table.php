@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('submission_id')->constrained('form_submissions')->onDelete('cascade');  // Link to the submission
             $table->foreignId('question_id')->constrained('questions')->onDelete('cascade');  // Link to the question
-            $table->text('answer');  // Store the answer for this question
+            $table->json('answer');  // Store the answer for this question
             $table->timestamps();
         });
     }
