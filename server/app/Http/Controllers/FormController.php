@@ -20,6 +20,12 @@ class FormController extends Controller
         ]);
 
     }
+    public function getForms(){
+        $forms = Form::all();
+        info("forms are here------->");
+        info($forms);
+        return response()->json($forms);
+    }
     public function getQuestion($formId, $questionId)
     {
         $question = Question::where('form_id', $formId)->where('id', $questionId)->first();

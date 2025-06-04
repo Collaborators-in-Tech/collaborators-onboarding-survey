@@ -21,7 +21,7 @@ function App() {
     <Header />
     <Routes>
       <Route path="/" element={<WelcomePage />} />
-      <Route path="/form" element={<FormPage />} />
+      <Route path="/form/:formId" element={<FormPage />} />
       
       <Route path="/admin" element={<Admin />} />
       <Route path="/admin/admin-dashboard" element={<ProtectedRoute> <AdminDashboard /> </ProtectedRoute>} />

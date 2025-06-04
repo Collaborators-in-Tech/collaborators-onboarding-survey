@@ -8,6 +8,7 @@ use App\Http\Controllers\FormController;
 
 Route::prefix('form')->group(function () {
     // Publicly accessible
+    Route::get('/', [FormController::class, 'getForms']);
     Route::get('/{formId}/questions', [FormController::class, 'getQuestions']);
     Route::post('/{formId}/answers', [AnswersController::class, 'postAnswers']);
 

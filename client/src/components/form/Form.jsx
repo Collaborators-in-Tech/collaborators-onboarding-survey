@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SubmitButton from "../SubmitButton";
 import ShortTextQuestion from "../questions/ShortTextQuestion";
 import SelectQuestion from "../questions/SelectQuestion";
@@ -9,6 +9,7 @@ import {API} from "../../config/api";
 
 const Form = () => {
   const [step, setStep] = useState(0);
+  const {formId} = useParams();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -25,7 +26,7 @@ const Form = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(API.GET_QUESTIONS(1))
+    fetch(API.GET_QUESTIONS(formId))
       .then((res) => res.json())
       .then((data) => {
         setApiData(data);
