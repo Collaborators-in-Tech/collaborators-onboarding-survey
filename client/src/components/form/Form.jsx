@@ -6,6 +6,7 @@ import SelectQuestion from "../questions/SelectQuestion";
 import CheckboxGroupQuestion from "../questions/CheckboxGroupQuestion";
 import "../../styles/form/form.css";
 import {API} from "../../config/api";
+import ErrorModal from "../modals/ErrorModal";
 
 const Form = () => {
   const [step, setStep] = useState(0);
@@ -15,6 +16,7 @@ const Form = () => {
   const navigate = useNavigate();
   const [apiData, setApiData] = useState();
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     fetch(API.GET_QUESTIONS(formId))
@@ -92,9 +94,10 @@ const Form = () => {
   
       if (!response.ok) {
         const err = await response.json();
-        alert("Error: " + (err.error || "Unknown error"));
+        setErrorMessage(err.error || "Unknown error");
         return;
       }
+      
   
       const data = await response.json();
       console.log("Success:", data);
@@ -102,7 +105,7 @@ const Form = () => {
   
     } catch (err) {
       console.error("Submission failed:", err);
-      alert("There was an error submitting the form.");
+      setErrorMessage("There was an error submitting the form.");
     }
   };
 
@@ -112,6 +115,7 @@ const Form = () => {
   console.log("Length: ",apiData.questions.length, "Step: ", step);
 
   return (
+    <>
     <div className="form-container">
       {/* <h2 className="form-title">{apiData.questions[step].questions_text}</h2> */}
       <form onSubmit={handleSubmit}>
@@ -203,6 +207,8 @@ const Form = () => {
         </div>
       </form>
     </div>
+    <ErrorModal message={errorMessage} onClose={() => setErrorMessage("")} />
+    </>
   );
 };
 
