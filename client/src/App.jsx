@@ -28,7 +28,7 @@ function App() {
       <Route path="/admin/admin-dashboard" element={<ProtectedRoute> <AdminDashboard /> </ProtectedRoute>} />
       <Route path="/admin/user-details" element={<ProtectedRoute><UserDetails /> </ProtectedRoute>} />
       <Route path="/admin/users-list" element={<ProtectedRoute><UserList /> </ProtectedRoute>} />
-      <Route path="/admin/edit-form" element={<ProtectedRoute><EditForm /> </ProtectedRoute>} />
+      <Route path="/admin/edit-form/:id" element={<ProtectedRoute><EditForm /> </ProtectedRoute>} />
       <Route path="/admin/add-form" element={<ProtectedRoute><AddNewForm /> </ProtectedRoute>} />
       <Route path="/admin/admins-list" element={<ProtectedRoute><AdminList /> </ProtectedRoute>} />
       <Route  path="/admin/edit-question/:formId/:questionId" element={<ProtectedRoute><EditQuestion /></ProtectedRoute>}/>

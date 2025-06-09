@@ -3,11 +3,35 @@ import "../../styles/admin/admin.css";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { FaBook, FaList, FaPlug, FaPlus, FaUsers } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import {API} from "../../config/api";
 
 const AdminDashboard = () => {
+  const [forms, setForms] = useState([]);
+
+  useEffect(() => {
+    const getForms = async () => {
+      try {
+        const response = await fetch(API.GET_FORMS);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        console.log("all forms:",response);
+        const data = await response.json();
+        console.log("response data:",data);
+        setForms(data);
+      } catch (error) {
+        console.error("Error fetching forms:", error);
+      } 
+    };
+
+    getForms();
+  }, []);
+
+
     const navigate = useNavigate();
-    const editForm = () => {
-        navigate("/admin/edit-form");
+    const editForm = (id) => {
+      navigate(`/admin/edit-form/${id}`);
     }
     const registerAdmin = () => {
       navigate("/admin/register")
@@ -36,7 +60,14 @@ const AdminDashboard = () => {
       <div className="box-container">
          <h3>Manage forms</h3>
          <div className="box">
-           <div><div  className="icon-box" onClick={editForm}> <FaBook className="book-icon"/></div>onboarding </div>
+         {forms.map((form) => (
+            <div key={form.id}>
+              <div className="icon-box" onClick={() => editForm(form.id)}>
+                <FaBook className="book-icon" />
+              </div>
+              {form.name}
+            </div>
+          ))}    
           </div>
       </div>
       <div className="divider-line"></div>

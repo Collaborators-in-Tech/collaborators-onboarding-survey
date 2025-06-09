@@ -13,24 +13,29 @@ const UserList = () =>{
     const {token} = useContext(AuthContext);
    
     useEffect(() => {
-      fetch(API.GET_ANSWERS, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, 
-        },
-      })
-        .then((res) => {
-          if (!res.ok) throw new Error("Failed to fetch user answers.");
-          return res.json();
-        })
-        .then((data) => {
-          console.log("Fetched answers:", data);
-          setFormsList(data);
-        })
-        .catch((err) => {
-          console.error("Error fetching form answers:", err);
-        });
+        const getUsrs = async () =>{
+          try{
+            const response = await fetch(API.GET_ANSWERS,{
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`, 
+              },
+            })
+            if (!response.ok) {
+               throw new Error("Failed to fetch user answers.");
+            }
+            console.log("all users :",response);
+            const data = await response.json();
+            console.log("response data:",data);
+            setFormsList(data)
+
+          }catch(err){
+            console.error("Error fetching form answers:", err);
+          }
+
+        }
+        getUsrs();
     }, []);
   
     const handleShowDetails = (userData) =>{
@@ -65,6 +70,7 @@ const UserList = () =>{
                     <div className="user-list-header">
                     <span>Name</span>
                     <span>Email</span>
+                    <span>Form Title</span>
                     <span>Action</span>
                     </div>
 
@@ -72,6 +78,7 @@ const UserList = () =>{
                     <div key={entry.id} className="user-list-row">
                         <span>{entry.name}</span>
                         <span>{entry.email}</span>
+                        <span>{entry.form_title}</span>
                         <span className="action-buttons">
                             <span onClick={() => handleShowDetails(entry)}>< FaInfoCircle /></span>
                             <span onClick={() => handleDelete(entry.id)}><FaTrashAlt /></span>

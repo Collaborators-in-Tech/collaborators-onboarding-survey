@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API } from "../../config/api";
 import QuestionCard from "../../components/admin/QuestionCard";
@@ -11,6 +11,7 @@ const EditForm = () => {
     const navigate = useNavigate();
     const [questions, setQuestions] = useState([]);
     const [form,setForm] = useState([]);
+    const {id} = useParams();
 
     const handleNavigate = () => {
         navigate("/admin/admin-dashboard");
@@ -19,7 +20,7 @@ const EditForm = () => {
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const res = await fetch(API.GET_QUESTIONS, {
+                const res = await fetch(API.GET_QUESTIONS(id), {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

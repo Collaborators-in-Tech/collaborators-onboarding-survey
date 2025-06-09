@@ -15,7 +15,7 @@ class FormSeeder extends Seeder
     public function run(): void
     {
         DB::table('forms')->insert([
-            'name'          => "Collaboration Group Form",
+            'name'          => "Collaboration Form",
             'description'   => "Form to join a collaboration group"
         ]);
     }

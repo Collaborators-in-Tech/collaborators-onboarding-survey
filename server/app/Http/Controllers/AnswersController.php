@@ -57,21 +57,18 @@ class AnswersController extends Controller
         ]);
 
     }
-    public function getAnswers(){
-        log::info("get request for all the answers");
-        $form_id = env('DEFAULT_FORM_ID');
-        $formSubmissions = FormSubmission::with(['answers.question'])
-                            ->where('form_id',$form_id)
-                            ->get();
-        log::info("all the form submissions");
+
+    public function getAnswers() {
+    
+        // Eager load 'form', 'answers.question' for all submissions
+        $formSubmissions = FormSubmission::with(['form', 'answers.question'])->get();
+    
         $response = $formSubmissions->map(function ($submission) {
-            info("------ submission ------");
-            info($submission);
-        
             $nameAnswer = $submission->answers->first()?->answer ?? 'N/A';
-        
+    
             return [
                 'id' => $submission->id,
+                'form_title' => $submission->form->name ?? 'Unknown Form',
                 'email' => $submission->email,
                 'name' => $nameAnswer,
                 'consent_given' => $submission->consent_given,
@@ -83,11 +80,10 @@ class AnswersController extends Controller
                 }),
             ];
         });
-        
-        
-
+    
         return response()->json($response);
     }
+
     public function deleteUser($id) {
         $submission  = FormSubmission::find($id);
         if (!$submission) {
