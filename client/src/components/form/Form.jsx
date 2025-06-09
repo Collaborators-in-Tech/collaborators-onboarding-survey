@@ -11,6 +11,7 @@ const Form = () => {
   const [step, setStep] = useState(0);
   const {formId} = useParams();
   const [formData, setFormData] = useState({});
+  const [consent,setConsent] = useState(false);
   const navigate = useNavigate();
   const [apiData, setApiData] = useState();
   const [loading, setLoading] = useState(true);
@@ -37,7 +38,7 @@ const Form = () => {
 
   // handleNext should also check if required fields are filled.
   const handleNext = () => {
-    if (step < apiData.questions.length - 1) {
+    if (step < apiData.questions.length) {
       setStep((prev) => prev + 1);
     }
   };
@@ -64,7 +65,8 @@ const Form = () => {
     e.preventDefault();
     console.log("Submitted:", formData);
     const email = getEmailValue();
-    const consent_given = true; 
+    const consent_given = consent;
+    console.log("consent",consent);
     const answers = {};
     for (const key in formData) {
       if (key.startsWith("question_")) {
@@ -105,15 +107,34 @@ const Form = () => {
   };
 
   if (loading) return <div> Loading questions...</div>;
-  if (!apiData || apiData.questions.length == 0 || !apiData.questions[step])
+  if (!apiData || apiData.questions.length == 0 )
     return <div> Loading...</div>;
-  console.log("Length: ",apiData.questions.length -1, "Step: ", step);
+  console.log("Length: ",apiData.questions.length, "Step: ", step);
 
   return (
     <div className="form-container">
-      <h2 className="form-title">{apiData.questions[step].questions_text}</h2>
+      {/* <h2 className="form-title">{apiData.questions[step].questions_text}</h2> */}
       <form onSubmit={handleSubmit}>
         {(() => {
+            if (step === apiData.questions.length) {
+              // Final step: consent
+              return (
+                <div className="consent-box">
+                  <label className="checkbox-option">
+                    <input
+                     className=""
+                      type="checkbox"
+                      name="consent_given"
+                      checked={consent}
+                      onChange={(e) => setConsent(e.target.checked)}
+                      required
+                    />
+                    I consent to submitting my answers and agree to the privacy policy.
+                  </label>
+                </div>
+              );
+            }
+
           const q = apiData.questions[step];
           const name = `question_${q.id}`; // use question ID as field name
           const value = formData[name] || "";
@@ -134,7 +155,7 @@ const Form = () => {
               <ShortTextQuestion key={q.id} {...commonProps} type="email" />
             );
           }
-          
+
 
           if (q.type === "select" && Array.isArray(q.options)) {
             return (
@@ -165,18 +186,19 @@ const Form = () => {
             );
           }
 
+
           return null;
         })()}
         <div className="form-nav">
           <button type="button" onClick={handleBack}>
             Back
           </button>
-          {step < apiData.questions.length - 2 ? (
+          {step < apiData.questions.length  ? (
             <button type="button" className="next" onClick={handleNext}>
               Next
             </button>
           ) : (
-            <SubmitButton />
+            <SubmitButton disabled={!consent}  />
           )}
         </div>
       </form>

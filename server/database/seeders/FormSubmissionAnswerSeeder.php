@@ -39,7 +39,6 @@ class FormSubmissionAnswerSeeder extends Seeder
                     8 => json_encode(':)'),
                     9 => json_encode('Nej'),
                     10 => json_encode('test1@example.com'),
-                    11 => json_encode(true),
                 ],
             ],
             [
@@ -54,7 +53,6 @@ class FormSubmissionAnswerSeeder extends Seeder
                     8 => json_encode(':)'),
                     9 => json_encode('Nej'),
                     10 => json_encode('test2@example.com'),
-                    11 => json_encode(true),
                 ],
             ],
         ];

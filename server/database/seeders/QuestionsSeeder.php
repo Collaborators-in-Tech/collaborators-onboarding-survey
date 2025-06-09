@@ -127,17 +127,6 @@ class QuestionsSeeder extends Seeder
                 'depending_value' => null,
                 'options' => null
             ],
-            [
-                'form_id' => 1,
-                'question_text' => 'Do you agree to our terms and conditions?',
-                'description' => null,
-                'type' => 'boolean',
-                'is_required' => true,
-                'sort_order' => 11,
-                'depends_on_question' => false,
-                'depending_value' => null,
-                'options' => null
-            ],
 
 
         ]);
