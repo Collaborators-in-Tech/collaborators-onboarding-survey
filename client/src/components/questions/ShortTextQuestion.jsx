@@ -8,6 +8,7 @@ const ShortTextQuestion = ({
   required = false,
   placeholder = "Type your answer here...",
   name,
+  type,
 }) => (
   <div className="question short-text-question">
     <label className="question-label">
@@ -17,7 +18,7 @@ const ShortTextQuestion = ({
     {description && <div className="question-description">{description}</div>}
     <input
       className="question-input"
-      type="text"
+      type={type}
       name={name}
       value={value}
       onChange={onChange}

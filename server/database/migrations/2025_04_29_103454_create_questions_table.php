@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('form_id')->constrained('forms')->onDelete('cascade');
             $table->text("question_text");
             $table->text("description")->nullable();
-            $table->enum('type',['text','radio','checkbox','boolean']);
+            $table->enum('type', ['text', 'email', 'radio', 'checkbox', 'boolean']);
             $table->boolean('depends_on_question')->default(false);
             $table->string('depending_value')->nullable();
             $table->integer('sort_order');

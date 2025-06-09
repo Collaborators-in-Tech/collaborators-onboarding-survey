@@ -120,7 +120,7 @@ class QuestionsSeeder extends Seeder
                 'form_id' => 1,
                 'question_text' => 'Ange din e-postaddress',
                 'description' => null,
-                'type' => 'text',
+                'type' => 'email',
                 'is_required' => true,
                 'sort_order' => 10,
                 'depends_on_question' => false, 

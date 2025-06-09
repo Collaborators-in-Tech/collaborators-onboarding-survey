@@ -10,17 +10,7 @@ import {API} from "../../config/api";
 const Form = () => {
   const [step, setStep] = useState(0);
   const {formId} = useParams();
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    profession: "",
-    topPriority: "",
-    communityNeed: "",
-    projectTimes: [],
-    hoursPerWeek: "",
-    disciplines: [],
-    disciplinesOther: "",
-  });
+  const [formData, setFormData] = useState({});
   const navigate = useNavigate();
   const [apiData, setApiData] = useState();
   const [loading, setLoading] = useState(true);
@@ -60,10 +50,58 @@ const Form = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const getEmailValue = () => {
+    const emailQuestion = apiData.questions.find(
+      (q) => q.type === "email" || q.question_text.toLowerCase().includes("email")
+    );
+  
+    if (!emailQuestion) return "";
+    return formData[`question_${emailQuestion.id}`] || "";
+  };
+  
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log("Submitted:", formData);
-    navigate("/thank");
+    const email = getEmailValue();
+    const consent_given = true; 
+    const answers = {};
+    for (const key in formData) {
+      if (key.startsWith("question_")) {
+        const questionId = key.split("_")[1];
+        answers[questionId] = formData[key];
+      }
+    }
+    console.log("_________ANSWERS___________");
+    console.log(answers);
+
+    try {
+      const response = await fetch(API.POST_ANSWERS(formId), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          consent_given,
+          answers,
+        }),
+      });
+  
+      if (!response.ok) {
+        const err = await response.json();
+        alert("Error: " + (err.error || "Unknown error"));
+        return;
+      }
+  
+      const data = await response.json();
+      console.log("Success:", data);
+      navigate("/thank");
+  
+    } catch (err) {
+      console.error("Submission failed:", err);
+      alert("There was an error submitting the form.");
+    }
   };
 
   if (loading) return <div> Loading questions...</div>;
@@ -89,8 +127,14 @@ const Form = () => {
           };
 
           if (q.type === "text" || q.type === "short-text") {
-            return <ShortTextQuestion key={q.id} {...commonProps} />;
+            return <ShortTextQuestion key={q.id} {...commonProps} type="text" />;
           }
+          if (q.type === "email") {
+            return (
+              <ShortTextQuestion key={q.id} {...commonProps} type="email" />
+            );
+          }
+          
 
           if (q.type === "select" && Array.isArray(q.options)) {
             return (

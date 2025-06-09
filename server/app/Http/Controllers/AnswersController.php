@@ -11,34 +11,41 @@ use Laravel\Pail\ValueObjects\Origin\Console;
 class AnswersController extends Controller
 {
     public function postAnswers(Request $request,$formId){
+        info("__________post answers is here________");
+        info($request->all());
         $validated = $request->validate([
             'email' => 'required|email',
             'consent_given' => 'required|boolean',
             'answers' => 'required|array',
-        ]);
-        
+        ]);     
+        info("  before consent vlidation....");
         // $form_id = env('DEFAULT_FORM_ID');
         if (!$validated['consent_given']) {
             return response()->json([
                 'error' => 'Consent of user is not given.'
             ], 400);
         }
+        info("  checking for unique email.........>>>>>");
         if(FormSubmission::where('form_id',$formId)
             ->where('email',$validated['email'])->exists()){
             return response()->json([
                 'error' => 'This email has already submitted this form'
             ],409);
          }
+         info("before---form_submission create");
+         
         $formSubmission = FormSubmission::create([
             'form_id' => $formId,
             'email' => $validated['email'],
             'consent_given' => $validated['consent_given']
         ]);
+        info("form_submission");
+        info($formSubmission);
         $answers = collect($validated['answers'])->map(function($answer,$question_id) use ($formSubmission){
             return [
                 'submission_id' => $formSubmission->id,
                 'question_id' => $question_id,
-                'answer' => $answer,
+                'answer' => json_encode($answer),
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
