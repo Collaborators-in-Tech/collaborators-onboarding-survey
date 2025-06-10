@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../../config/api";
 import QuestionEditor from "../../components/admin/QuestionEditor";
@@ -16,9 +16,11 @@ const EditQuestion = () => {
     const {token} = useContext(AuthContext);
     const navigate = useNavigate();
 
+
     const handleNavigate = () => {
-        navigate("/admin/edit-form");
+        navigate(`/admin/edit-form/${formId}`);
     };
+  
 
     useEffect(() => {
         const fetchQuestion = async () => {
@@ -54,7 +56,7 @@ const EditQuestion = () => {
 
     return (
         <>
-            <GoBack url={"/admin/edit-form"}/>
+            <GoBack url={`/admin/edit-form/${formId}`}/>
             <main className="edit-question-container">
                 <div className="edit-card">
                     <QuestionEditor question = {question} formId={formId}/>                            

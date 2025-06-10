@@ -1,4 +1,4 @@
-import { FaPencilAlt } from "react-icons/fa";
+import { FaPencilAlt, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router";
 
 const QuestionCard = ({ question, form, index }) => {
@@ -7,6 +7,9 @@ const QuestionCard = ({ question, form, index }) => {
     const handleEdit = () => {
       navigate(`/admin/edit-question/${form.id}/${question.id}`);
     };
+    const handleDelete = () => {
+      
+    }
   
     // Safely parse options
     const optionsArray = (() => {
@@ -40,6 +43,12 @@ const QuestionCard = ({ question, form, index }) => {
             className="edit-icon"
             title="Edit Question"
             size={18}
+          />
+          <FaTrash 
+          onClick={handleDelete}
+          className="delete-icon"
+          title="delete Question"
+          size={18}
           />
         </div>
   

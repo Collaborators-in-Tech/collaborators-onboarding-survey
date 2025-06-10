@@ -36,9 +36,17 @@
 }
 
 .edit-icon {
+    margin-left: 5px;
     cursor: pointer;
     color: #007bff;
     transition: color 0.2s ease;
+}
+.delete-icon{
+   margin-left: 5px;
+    cursor: pointer;
+    color: #007bff;
+    transition: color 0.2s ease;
+
 }
 
 .edit-icon:hover {

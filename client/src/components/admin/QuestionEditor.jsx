@@ -114,13 +114,13 @@ const QuestionEditor = ({ question, formId }) => {
         }
     
         console.log("Question updated successfully:", data);
-        navigate("/admin/edit-form");
+        navigate(`/admin/edit-form/${formId}`);
       } catch (error) {
         console.error("Error saving question:", error);
       }
   };
   const handleCancel = () => {
-    navigate("/admin/edit-form");
+    navigate(`/admin/edit-form/${formId}`);
     console.log("here is the cancel...");
   }
 
