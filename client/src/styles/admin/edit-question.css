@@ -1,3 +1,7 @@
+ .edit-form{
+  text-align: center;
+
+ }
  .edit-question-container{
   max-width: 600px;              
   margin: 10px auto;          
@@ -7,6 +11,7 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 
  }
+
   .question-card {
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -106,4 +111,14 @@
 }
 
 
+.type-select{
+  flex: 1;
+  margin-left: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+form.question-editor {
+  gap: 0 !important;
+}
 

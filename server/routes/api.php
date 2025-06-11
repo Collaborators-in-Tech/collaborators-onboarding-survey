@@ -26,8 +26,13 @@ Route::prefix('admin')->group(function () {
     Route::delete('/delete-admin/{id}',[AuthController::class,'deleteAdmin'])->middleware('auth:sanctum','superadmin');
     Route::get('/admin-list',[AuthController::class,'getAdmins'])->middleware('auth:sanctum');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
-    // Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum')->name('logout');
     Route::post('/update-password', [AuthController::class, 'updatePassword'])->middleware('auth:sanctum');
+    
     Route::delete('/delete-user/{id}', [AnswersController::class, 'deleteUser'])->middleware('auth:sanctum');
+
+    //for creating new form
+    Route::post('/new-form', [FormController::class, 'createForm'])->middleware('auth:sanctum');
+
+
 });

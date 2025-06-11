@@ -20,12 +20,7 @@ class FormController extends Controller
         ]);
 
     }
-    public function getForms(){
-        $forms = Form::all();
-        info("forms are here------->");
-        info($forms);
-        return response()->json($forms);
-    }
+  
     public function getQuestion($formId, $questionId)
     {
         $question = Question::where('form_id', $formId)->where('id', $questionId)->first();
@@ -49,5 +44,27 @@ class FormController extends Controller
         ]);
         return response()->json($question);
     
+    }
+    
+    public function createForm(Request $request){
+        info("_______creating form__________");
+        info($request->all());
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+     
+        $form = Form::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'created_at' => now(),
+        ]);
+        return response()->json(['form' =>$form],201);
+    }
+    public function getForms(){
+        $forms = Form::all();
+        info("forms are here------->");
+        info($forms);
+        return response()->json($forms);
     }
 }

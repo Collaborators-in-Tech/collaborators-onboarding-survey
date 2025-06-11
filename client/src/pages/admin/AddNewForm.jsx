@@ -1,14 +1,45 @@
 import { useState } from "react"
 import GoBack from "../../components/admin/GoBack"
 import "../../styles/admin/add-form.css";
+import {API} from "../../config/api";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import ErrorModal from "../../components/modals/ErrorModal";
 
 const AddNewForm = () => {
     const [formName, setFormName] = useState("");
     const [description, setDescription] = useState("");
+    const {token} = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         console.log("Form submitted:", { formName, description });
+        try{
+            const response = await fetch(API.CREATE_FORM,{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`, 
+
+                  },
+                  body: JSON.stringify({ name:formName, description }),
+            });
+            if (!response.ok) {
+                const err = await response.json();
+                setErrorMessage(err.error || "Unknown error");
+                return;
+            }
+
+      const form = await response.json();
+      console.log("Success:", form);
+    //   navigate("");
+  
+    } catch (err) {
+      console.error("Submission failed:", err);
+      setErrorMessage("There was an error creating the form.");
+    }
+
     };
 
     return (
@@ -19,7 +50,7 @@ const AddNewForm = () => {
                 
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="formName">Name of Form</label>
+                        <label htmlFor="formName">Form Name</label>
                         <input
                             className="addform-input"
                             type="text"
@@ -28,6 +59,7 @@ const AddNewForm = () => {
                             value={formName}
                             onChange={(e) => setFormName(e.target.value)}
                             placeholder="Enter form name"
+                            required
                         />
                     </div>
                     <div>
@@ -45,6 +77,7 @@ const AddNewForm = () => {
                     <button type="submit">Create</button>
                 </form>
             </main>
+            <ErrorModal message={errorMessage} onClose={() => setErrorMessage("")} />
         </>
     );
 };

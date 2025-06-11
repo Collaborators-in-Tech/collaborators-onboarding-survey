@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API } from "../../config/api";
 import QuestionCard from "../../components/admin/QuestionCard";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaPlusCircle } from "react-icons/fa";
 
 import "../../styles/admin/admin.css";
 import GoBack from "../../components/admin/GoBack";
@@ -11,11 +11,9 @@ const EditForm = () => {
     const navigate = useNavigate();
     const [questions, setQuestions] = useState([]);
     const [form,setForm] = useState([]);
-    const {id} = useParams();
+    const {id} = useParams(); //formId
 
-    const handleNavigate = () => {
-        navigate("/admin/admin-dashboard");
-    };
+   
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -44,9 +42,17 @@ const EditForm = () => {
         fetchQuestions();
     }, []);
 
+    const addQuestion = () =>{
+        const nextSortOrder = questions.length ? Math.max(...questions.map(q => q.sort_order)) +1 : 1;
+        navigate(`/admin/add-question/${id}`,{
+            state:{nextSortOrder},
+        });
+    }
+        
     return (
         <>
                 <GoBack  url ={"/admin/admin-dashboard"}/>
+                <div className="edit-form">
                 <h3>{form?.name}</h3>
                
                 {questions.map((question,index) => (
@@ -59,8 +65,12 @@ const EditForm = () => {
                     />
                    </div>
                 ))}
+                <button onClick= {addQuestion} className="add-question-btn">
+                    <FaPlusCircle style={{ marginRight: "5px" }} />
+                    Add Question
+                </button>
               
-           
+                </div>
         </>
     );
 };

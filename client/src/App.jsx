@@ -14,6 +14,7 @@ import UserList from "./pages/admin/UserList";
 import AddNewForm from "./pages/admin/AddNewForm";
 import AdminList from "./pages/admin/AdminList";
 import { ThankYouPage } from "./pages/ThankYouPage";
+import AddQuestion from "./pages/admin/AddQuestion";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <Route path="/admin/user-details" element={<ProtectedRoute><UserDetails /> </ProtectedRoute>} />
       <Route path="/admin/users-list" element={<ProtectedRoute><UserList /> </ProtectedRoute>} />
       <Route path="/admin/edit-form/:id" element={<ProtectedRoute><EditForm /> </ProtectedRoute>} />
+      <Route path="/admin/add-question/:formId" element={<ProtectedRoute><AddQuestion /> </ProtectedRoute>} />
       <Route path="/admin/add-form" element={<ProtectedRoute><AddNewForm /> </ProtectedRoute>} />
       <Route path="/admin/admins-list" element={<ProtectedRoute><AdminList /> </ProtectedRoute>} />
       <Route  path="/admin/edit-question/:formId/:questionId" element={<ProtectedRoute><EditQuestion /></ProtectedRoute>}/>
