@@ -46,31 +46,40 @@ class FormController extends Controller
     
     }
     public function storeQuestion(Request $request, $formId)
-{
-    $validated = $request->validate([
-        'question_text'       => 'required|string|max:65535',
-        'description'         => 'nullable|string',
-        'type'                => 'required|in:text,email,radio,checkbox,boolean',
-        'is_required'         => 'boolean',
-        'options'             => 'required_if:type,radio,checkbox|array|min:1',
-        'options.*'           => 'string|max:255',
-        'sort_order'          => 'required|integer|min:1',
-        'depends_on_question' => 'sometimes|boolean',
-        'depending_value'     => 'nullable|string|max:255',
-    ]);
+    {
+        $validated = $request->validate([
+            'question_text'       => 'required|string|max:65535',
+            'description'         => 'nullable|string',
+            'type'                => 'required|in:text,email,radio,checkbox,boolean',
+            'is_required'         => 'boolean',
+            'options'             => 'required_if:type,radio,checkbox|array|min:1',
+            'options.*'           => 'string|max:255',
+            'sort_order'          => 'required|integer|min:1',
+            'depends_on_question' => 'sometimes|boolean',
+            'depending_value'     => 'nullable|string|max:255',
+        ]);
 
-    // Create and persist the question
-    $question = Question::create([
-        'form_id'  => $formId,
-        ...$validated,
-        'options'  => in_array($validated['type'], ['radio', 'checkbox'])
-                        ? $validated['options']
-                        : null,
-    ]);
+        // Create and persist the question
+        $question = Question::create([
+            'form_id'  => $formId,
+            ...$validated,
+            'options'  => in_array($validated['type'], ['radio', 'checkbox'])
+                            ? $validated['options']
+                            : null,
+        ]);
 
-    return response()->json($question, 201);
-}
-
+        return response()->json($question, 201);
+    }
+    public function deleteQuestion($formId,$questionId){
+        $question = Question::where('id',$questionId)->where('form_id',$formId)->first();
+        if(!$question){
+            return response()->json(['error' => 'Question not found'], 404);
+        }
+        $question->delete();
+        return response()->json([
+            'message' => "Question deleted successfully"
+        ]);
+    }
     
     public function createForm(Request $request){
         info("_______creating form__________");

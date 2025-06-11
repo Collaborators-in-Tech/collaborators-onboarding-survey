@@ -16,6 +16,7 @@ Route::prefix('form')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/question/{formId}/{questionId}', [FormController::class, 'getQuestion']);
         Route::put('/question/{formId}/{questionId}', [FormController::class, 'updateQuestion']);
+        Route::delete('/question/{formId}/{questionId}', [FormController::class, 'deleteQuestion']);
         Route::get('/answers', [AnswersController::class, 'getAnswers']);
         Route::post('/question/{formId}',[FormController::class,'storeQuestion']);
     });
