@@ -19,7 +19,12 @@ Route::prefix('form')->group(function () {
         Route::delete('/question/{formId}/{questionId}', [FormController::class, 'deleteQuestion']);
         Route::get('/answers', [AnswersController::class, 'getAnswers']);
         Route::post('/question/{formId}',[FormController::class,'storeQuestion']);
+
+         //for creating new form
+        Route::post('/new-form', [FormController::class, 'createForm']);
+        Route::delete('/{formId}',[FormController::class,'deleteForm']);
     });
+
 });
 
 
@@ -33,8 +38,8 @@ Route::prefix('admin')->group(function () {
 
     Route::delete('/delete-user/{id}', [AnswersController::class, 'deleteUser'])->middleware('auth:sanctum');
 
-    //for creating new form
-    Route::post('/new-form', [FormController::class, 'createForm'])->middleware('auth:sanctum');
+   
+    
    
 
 });

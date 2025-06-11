@@ -110,6 +110,17 @@ class FormController extends Controller
 
         return response()->json(['form' =>$form],201);
     }
+    public function deleteForm($formId){
+        $form = Form::where('id',$formId)->first();
+        if(!$form){
+            return response()->json(['error' => 'Form not found'], 404);
+        }
+        $form->delete();
+        return response()->json([
+            "message" => "Form deleted successfully."
+        ]);
+
+    }
     public function getForms(){
         $forms = Form::all();
         info("forms are here------->");
