@@ -2,12 +2,14 @@
 import "../../styles/admin/admin.css";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import { FaBook, FaList, FaPlug, FaPlus, FaUsers } from "react-icons/fa";
+import { FaBook, FaEllipsisV, FaList, FaPlug, FaPlus, FaUsers } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import {API} from "../../config/api";
 
 const AdminDashboard = () => {
   const [forms, setForms] = useState([]);
+  const navigate = useNavigate();
+  const [dropdownOpen, setDropdownOpen] = useState(null);
 
   useEffect(() => {
     const getForms = async () => {
@@ -29,7 +31,10 @@ const AdminDashboard = () => {
   }, []);
 
 
-    const navigate = useNavigate();
+
+    const toggleDropdown = (formId) => {
+      setDropdownOpen(dropdownOpen === formId ? null : formId);
+    };
     const editForm = (id) => {
       navigate(`/admin/edit-form/${id}`);
     }
@@ -45,12 +50,29 @@ const AdminDashboard = () => {
     const adminList = () => {
       navigate("/admin/admins-list")
     }
+    const deleteForm = async (formId) => {
+      setDropdownOpen(null);
+      if (window.confirm("Are you sure you want to delete this form?")) {
+       
+        // try {
+        //   const response = await fetch(`${API.DELETE_FORM}/${formId}`, {
+        //     method: "DELETE",
+        //   });
+        //   if (!response.ok) throw new Error("Failed to delete form");
+    
+        //   setForms(forms.filter((form) => form.id !== formId));
+        // } catch (error) {
+        //   console.error("Error deleting form:", error);
+        // }
+      }
+    };
+    
 
   return (
     <>
    
     <main className="admin-main">
-      <div className="box-container">
+      <div className="box-container"  >
          <h3>create new form</h3>
          <div className="box">
           <div className="icon-box" onClick={addForm} > <FaPlus className="plus-icon"/></div>
@@ -62,8 +84,17 @@ const AdminDashboard = () => {
          <div className="box">
          {forms.map((form) => (
             <div key={form.id}>
-              <div className="icon-box" onClick={() => editForm(form.id)}>
-                <FaBook className="book-icon" />
+              <div className="ellipsis-box"> 
+                
+                <div className="icon-box" onClick={() => editForm(form.id)}>
+                  <FaBook className="book-icon" />
+                </div>
+                <span onClick={() => toggleDropdown(form.id)}><FaEllipsisV /></span>
+                {dropdownOpen === form.id && (
+                  <div className="dropdown-menu">
+                    <div onClick={() => deleteForm(form.id)}>Delete</div>
+                  </div>
+                )}
               </div>
               {form.name}
             </div>

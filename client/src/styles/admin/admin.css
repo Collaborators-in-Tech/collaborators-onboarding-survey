@@ -39,6 +39,35 @@
   display: flex;
  gap: 10px;
 }
+.ellipsis-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative; 
+}
+.dropdown-menu {
+  position: absolute;
+  /* right: 0;   */
+  transform: translateX(-100%); /* Move to the left of the ellipsis */
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 5px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 10;
+  min-width: 100px;
+}
+
+.dropdown-menu div {
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dropdown-menu div:hover {
+  background-color: #f5f5f5;
+}
+
 
 /* __________________________userList________________________________ */
 
@@ -127,8 +156,7 @@
 }
 
 
-  
- 
+
   
  
  
