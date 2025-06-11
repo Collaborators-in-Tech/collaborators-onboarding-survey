@@ -7,7 +7,7 @@ import GoBack from "../../components/admin/GoBack";
 import "../../styles/admin/edit-question.css";
 import { FaPlus, FaTrash } from "react-icons/fa";
 
-const QUESTION_TYPES = ["text", "email", "radio", "checkbox", "boolean"];
+const QUESTION_TYPES = ["text", "radio", "checkbox", "boolean"];
 
 export default function AddQuestion() {
   const { state } = useLocation();          // state.nextSortOrder passed from EditForm
@@ -64,29 +64,30 @@ export default function AddQuestion() {
         formData.type === "radio" || formData.type === "checkbox"
           ? formData.options.filter((o) => o.trim() !== "")
           : undefined,
+    
     };
     console.log("______new question_______");
     console.log(payload);
 
-    // try {
-    //   const res = await fetch(API.CREATE_QUESTION(formId), {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //     body: JSON.stringify(payload),
-    //   });
+    try {
+      const res = await fetch(API.CREATE_QUESTION(formId), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
 
-    //   if (!res.ok) {
-    //     const err = await res.json();
-    //     throw new Error(err.error ?? "Unknown error");
-    //   }
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error ?? "Unknown error");
+      }
 
-    //   navigate(`/admin/edit-form/${formId}`);        // back to the form
-    // } catch (err) {
-    //   setError(err.message);
-    // }
+      navigate(`/admin/edit-form/${formId}`);        // back to the form
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   // ---------------- UI ----------------

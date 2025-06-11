@@ -17,6 +17,7 @@ Route::prefix('form')->group(function () {
         Route::get('/question/{formId}/{questionId}', [FormController::class, 'getQuestion']);
         Route::put('/question/{formId}/{questionId}', [FormController::class, 'updateQuestion']);
         Route::get('/answers', [AnswersController::class, 'getAnswers']);
+        Route::post('/question/{formId}',[FormController::class,'storeQuestion']);
     });
 });
 
@@ -28,11 +29,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum')->name('logout');
     Route::post('/update-password', [AuthController::class, 'updatePassword'])->middleware('auth:sanctum');
-    
+
     Route::delete('/delete-user/{id}', [AnswersController::class, 'deleteUser'])->middleware('auth:sanctum');
 
     //for creating new form
     Route::post('/new-form', [FormController::class, 'createForm'])->middleware('auth:sanctum');
-
+   
 
 });

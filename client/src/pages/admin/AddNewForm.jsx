@@ -5,12 +5,14 @@ import {API} from "../../config/api";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import ErrorModal from "../../components/modals/ErrorModal";
+import { useNavigate } from "react-router-dom";
 
 const AddNewForm = () => {
     const [formName, setFormName] = useState("");
     const [description, setDescription] = useState("");
     const {token} = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -31,9 +33,9 @@ const AddNewForm = () => {
                 return;
             }
 
-      const form = await response.json();
-      console.log("Success:", form);
-    //   navigate("");
+      const data = await response.json();
+      console.log("Success:", data);
+      navigate(`/admin/edit-form/${data.form.id}`);
   
     } catch (err) {
       console.error("Submission failed:", err);

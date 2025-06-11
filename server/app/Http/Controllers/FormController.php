@@ -45,6 +45,32 @@ class FormController extends Controller
         return response()->json($question);
     
     }
+    public function storeQuestion(Request $request, $formId)
+{
+    $validated = $request->validate([
+        'question_text'       => 'required|string|max:65535',
+        'description'         => 'nullable|string',
+        'type'                => 'required|in:text,email,radio,checkbox,boolean',
+        'is_required'         => 'boolean',
+        'options'             => 'required_if:type,radio,checkbox|array|min:1',
+        'options.*'           => 'string|max:255',
+        'sort_order'          => 'required|integer|min:1',
+        'depends_on_question' => 'sometimes|boolean',
+        'depending_value'     => 'nullable|string|max:255',
+    ]);
+
+    // Create and persist the question
+    $question = Question::create([
+        'form_id'  => $formId,
+        ...$validated,
+        'options'  => in_array($validated['type'], ['radio', 'checkbox'])
+                        ? $validated['options']
+                        : null,
+    ]);
+
+    return response()->json($question, 201);
+}
+
     
     public function createForm(Request $request){
         info("_______creating form__________");
@@ -59,6 +85,20 @@ class FormController extends Controller
             'description' => $validated['description'],
             'created_at' => now(),
         ]);
+
+        $emailQuestion = Question::create([
+            'form_id' => $form->id,
+            'question_text' => 'What is your email address?',
+            'description' => null,
+            'type' => 'email',
+            'is_required' => true,
+            'sort_order' => 1, // always first
+            'options' => null,
+            'depends_on_question' => null,
+            'depending_value' => null,
+            'created_at' => now(),
+        ]);
+
         return response()->json(['form' =>$form],201);
     }
     public function getForms(){

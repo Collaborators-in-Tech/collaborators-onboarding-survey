@@ -12,6 +12,7 @@ export const API = {
   GET_QUESTIONS: (formId) => `${BASE_URL}/form/${formId}/questions`,
   GET_ADMINS: `${BASE_URL}/admin/admin-list`,
   GET_QUESTION: (formId,questionId) => `${BASE_URL}/form/question/${formId}/${questionId}`,
+  CREATE_QUESTION: (formId) => `${BASE_URL}/form/question/${formId}`,
   UPDATE_QUESTION:(formId,questionId) => `${BASE_URL}/form/question/${formId}/${questionId}`,
   POST_ANSWERS:(formId) =>`${BASE_URL}/form/${formId}/answers`,
   GET_ANSWERS: `${BASE_URL}/form/answers`,
