@@ -1,5 +1,5 @@
 .form-title {
-  color: #fff;
+  /* color: #fff; */
   font-size: 2.8rem;
   font-family: "Inter", Arial, sans-serif;
   font-weight: 300;
@@ -37,7 +37,7 @@ form {
 }
 
 .question-label {
-  color: #fff;
+  /* color: #fff; */
   font-size: 2.2rem;
   font-family: "Inter", Arial, sans-serif;
   font-weight: 300;
@@ -47,7 +47,7 @@ form {
 }
 
 .question-description {
-  color: #d3d6d6;
+  /* color: #d3d6d6; */
   font-size: 1.1rem;
   margin-bottom: 0.7rem;
   font-family: "Inter", Arial, sans-serif;
@@ -139,7 +139,7 @@ form {
   display: flex;
   align-items: center;
   font-size: 1.2rem;
-  color: #fff;
+  /* color: #fff; */
   font-family: "Inter", Arial, sans-serif;
   font-weight: 300;
 }
@@ -150,3 +150,7 @@ form {
   height: 2em;
   accent-color: #f3c846;
 }
+
+
+
+
