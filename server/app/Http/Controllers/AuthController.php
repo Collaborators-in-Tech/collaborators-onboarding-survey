@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AccountDeletedNotification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -87,7 +89,8 @@ class AuthController extends Controller
         if (!$admin) {
             return response()->json(['message' => 'Admin not found'], 404);
         }
-    
+        $superAdmin = User::where('role','super_admin')->pluck('name')->first();
+        Mail::to($admin->email)->send(new AccountDeletedNotification($admin->name,$superAdmin));
         $admin->delete();
     
         return response()->json(['message' => 'admin deleted successfully']);
