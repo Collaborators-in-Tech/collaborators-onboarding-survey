@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\FormDeletedNotification;
 use App\Models\Form;
+use App\Models\FormSubmission;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FormController extends Controller
 {
@@ -115,7 +118,14 @@ class FormController extends Controller
         if(!$form){
             return response()->json(['error' => 'Form not found'], 404);
         }
+        $emails = FormSubmission::where('form_id',$form->id)->pluck('email')->unique();
+        foreach($emails as $email){
+            Mail::to($email)->send(new FormDeletedNotification($form->name));
+
+        }
         $form->delete();
+
+
         return response()->json([
             "message" => "Form deleted successfully."
         ]);

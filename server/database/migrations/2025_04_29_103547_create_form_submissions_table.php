@@ -18,7 +18,6 @@ return new class extends Migration
             $table->boolean('consent_given');
             $table->timestamp('submitted_at')->useCurrent();
             $table->timestamps();
-
             $table->unique(['form_id', 'email']);
         });
     }
