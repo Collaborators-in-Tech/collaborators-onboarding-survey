@@ -79,6 +79,20 @@ class AuthController extends Controller
             'message' => 'Password updated successfully!'
         ]);
     }
+    public function updateName(Request $request){
+        $userData = $request->validate([
+            'name' => ['required'],    
+        ]);
+        $user = $request->user();
+        $user->update([
+            'name' => $userData['name']
+        ]);
+        return response()->json([
+            'message' => 'Name updated successfully',
+            'user' => $user
+        ]);
+
+    }
     public function getAdmins(){
         $admins = User::all();
         return response()->json($admins);

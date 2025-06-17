@@ -7,7 +7,7 @@ import ErrorModal from "../../components/modals/ErrorModal";
 import SuccessModal from "../../components/modals/SuccessModal";
 
 const Profile = () => {
-  const { user,token } = useContext(AuthContext);
+  const { user,token,updateUser } = useContext(AuthContext);
   const [name, setName] = useState(user?.name || "");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -17,8 +17,30 @@ const Profile = () => {
 
   const handleNameChange = (e) => {
     e.preventDefault();
-    // TODO: Add API call to update name
-    
+    const changeName = async() => {
+        try{
+            const response = await fetch(API.UPDATE_NAME,{
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({name:name})
+            })
+            const data = await response.json();
+            console.log("response data",data);
+            if(response.ok){
+                updateUser(data.user);  
+                setName(data.user.name);   
+                setSuccess("Name updated successfully!!");
+                return;
+            }
+            
+        }catch(err){
+            setError("error in updating name: " || err );
+        }
+    }
+    changeName();
   };
 
   const handlePasswordChange = (e) => {

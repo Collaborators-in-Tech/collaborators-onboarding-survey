@@ -8,6 +8,7 @@ export const API = {
   REGISTER: `${BASE_URL}/admin/register`,
   LOGOUT: `${BASE_URL}/admin/logout`,
   UPDATE_PASSWORD: `${BASE_URL}/admin/update-password`,
+  UPDATE_NAME: `${BASE_URL}/admin/update-name`,
   GET_FORMS:`${BASE_URL}/form`,
   GET_QUESTIONS: (formId) => `${BASE_URL}/form/${formId}/questions`,
   GET_ADMINS: `${BASE_URL}/admin/admin-list`,
