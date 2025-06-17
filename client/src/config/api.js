@@ -9,6 +9,7 @@ export const API = {
   LOGOUT: `${BASE_URL}/admin/logout`,
   UPDATE_PASSWORD: `${BASE_URL}/admin/update-password`,
   UPDATE_NAME: `${BASE_URL}/admin/update-name`,
+  DELETE_ACCOUNT: `${BASE_URL}/admin/delete-account`,
   GET_FORMS:`${BASE_URL}/form`,
   GET_QUESTIONS: (formId) => `${BASE_URL}/form/${formId}/questions`,
   GET_ADMINS: `${BASE_URL}/admin/admin-list`,

@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum')->name('logout');
     Route::post('/update-password', [AuthController::class, 'updatePassword'])->middleware('auth:sanctum');
     Route::post('/update-name', [AuthController::class, 'updateName'])->middleware('auth:sanctum');
+    Route::delete('/delete-account', [AuthController::class, 'deleteAccount'])->middleware('auth:sanctum');
     Route::delete('/delete-user/{id}', [AnswersController::class, 'deleteUser'])->middleware('auth:sanctum');
 
    

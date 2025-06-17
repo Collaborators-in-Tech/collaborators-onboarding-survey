@@ -93,6 +93,22 @@ class AuthController extends Controller
         ]);
 
     }
+    public function deleteAccount(Request $request){
+        $user = $request->user();
+        if(!$user){
+            return response()->json([
+                "message" => "User not authenticated"
+            ],401);
+        }
+        try{
+            $user->delete();
+            $user->tokens()->delete();
+            return response()->json(["message" => "Account deleted Successfully"],200);
+
+        }catch(\Exception $e){
+            return response()->json(['message' => 'Failed to delete account', 'error' => $e->getMessage()], 500);
+        }
+    }
     public function getAdmins(){
         $admins = User::all();
         return response()->json($admins);
