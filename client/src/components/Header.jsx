@@ -1,6 +1,6 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import "./Header.css";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaCog } from "react-icons/fa";
 import { AuthContext } from "../context/AuthContext"; 
 import { useNavigate } from "react-router-dom";
 import { API } from "../config/api";
@@ -22,7 +22,13 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleSettings = () => {
+    setShowDropdown(false);
+    navigate("admin/profile");
+  }
+
   const handleLogout = async () => {
+    setShowDropdown(false);
     console.log("token: ", token);
 
     try {
@@ -62,7 +68,7 @@ const Header = () => {
 
             {showDropdown && (
               <div className="menu-dropdown">
-                <p className="dropdown-username">{user?.name}</p>
+                <p className="dropdown-username"><span className="settings-icon" onClick={handleSettings}><FaCog/></span><span className="profile-name">{user?.name}</span></p>
                 <button onClick={handleLogout} className="dropdown-logout">Logout</button>
               </div>
             )}
